@@ -29,9 +29,10 @@ Some people enjoy listening to songs where there are high notes, while some peop
 
 3. This might be a difficult one. In this task, we want to write a function that contains the audio information of a song, and return the genre of this song--"pop, rock, jazz, R&B, country, rap", and the evaluation is purely based on the rhythm of the song. This task may be based on task, or we can run a linear model to categorize the song(see what kinds of linear model the song fits the most).
 
-(We do not want the package to be a project; but if permitted, and in order to apply what we learn this semester to this group work, we may want to do some text mining in the next part)
 
 ## Text mining
+
+(We do not want the package to be a project; but if permitted, and in order to apply what we learn this semester to this group work, we may want to do some text mining in the next part)
 
 The procedure was pretty similar as before.
 
