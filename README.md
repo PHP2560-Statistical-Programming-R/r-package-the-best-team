@@ -11,7 +11,7 @@ And we will create a list in order to show all the games included.
 This package we would like to design is to explore musical data amd do some sound analysis with R. 
 Use the method we learned in the text mining project to visualize the musical data.
 
-##Data sources
+## Data sources
 
 [McGill Billboard dataset](http://ddmal.music.mcgill.ca/research/billboard)
 
@@ -19,7 +19,7 @@ Use the method we learned in the text mining project to visualize the musical da
 
 [Billboard Chart Archive](http://www.song-database.com/charts.php)
 
-##Audio Analysis
+## Audio Analysis
 
 1. --Ed Sheeran once said, 'I can play almost all the pop songs, with just five chords'.
 We want to analyze the factors that can influence the popularity of a song. Similar to text, there are some kind of patterns in songs. For example, when we say a song is catching, it may represent the chord pattern of "G-Am-C". In order to do this, we first want to recognize the pattern, which is, the pattern that is repeated the most in a specific song; Secondly, we want to extract the pattern; Thirdly, we want to match the pattern in other songs. An important thing is, every song begins with its own key, so the pattern of "G-Am-C" may be the same as "A-Bm-D" in this context, so the pattern should not carry the exact frequency, but a serires of frequency that has the same "shape". We want to write three functions that can respectively detect, extract and match patterns in songs.
@@ -31,11 +31,11 @@ Some people enjoy listening to songs where there are high notes, while some peop
 
 (We do not want the package to be a project; but if permitted, and in order to apply what we learn this semester to this group work, we may want to do some text mining in the next part)
 
-##Text mining
+## Text mining
 
 The procedure was pretty similar as before.
 
-##Difficulty
+## Difficulty
 
 We are quite not sure if we can do this project. The package we find dealing with audio is "tuneR", and none of us are familiar with this package and we are not sure how much it can help us with building this package.
 
