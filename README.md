@@ -19,7 +19,9 @@ We aim to renew some of the games by:
 
 (2)Fixing the bugs and make some modifications to the codes;
 
-(3)Adding some factors to the games so that they are more "playable".
+(3)Adding some factors to the games so that they are more "playable". For example, add a restart 
+
+button so that we don't have to call the function over and over again.
 
 ## Functions
 
