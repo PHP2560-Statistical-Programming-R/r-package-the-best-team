@@ -23,7 +23,7 @@ We aim to renew some of the games by:
 
 ## Functions
 
-(1)A list function that returns a table that contains the names of the games their following profile;
+(1)A function that returns a table that contains the names of the games their following profile;
 
 (2)Mine sweeper function (modified);
 
