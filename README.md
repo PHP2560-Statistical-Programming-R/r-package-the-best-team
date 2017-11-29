@@ -9,7 +9,7 @@ In this package, we will select some popular games from other packages,
 
 in which the codes are poorly commented and contain some bugs. Moreover, the coding style and coding
 
-strategy is somehow "out-of-fashion" because they were created a couple of years ago.
+strategy are somehow "out-of-fashion" because they were created a couple of years ago.
 
 ## Purpose
 
