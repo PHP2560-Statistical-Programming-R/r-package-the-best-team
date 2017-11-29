@@ -15,11 +15,11 @@ strategy are somehow "out-of-fashion" because they were created a couple of year
 
 We aim to renew some of the games by:
 
-(1)Add comments to the codes so that they are easy to understand;
+(1)Adding comments to the codes so that they are easy to understand;
 
-(2)Fix the bugs and make some modifications to the codes;
+(2)Fixing the bugs and make some modifications to the codes;
 
-(3)Add some factors to the games so that they are more "playable".
+(3)Adding some factors to the games so that they are more "playable".
 
 ## Functions
 
