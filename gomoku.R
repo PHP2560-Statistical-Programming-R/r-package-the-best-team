@@ -17,8 +17,8 @@ gomoku <- function(n = 19) {
 #Playing the game
   playedlist <- NULL #record the points have been stepped on
   i <- 1 #rounds that will have be played
-  black = list()
-  white = list()
+  black = list() #record the black chessman
+  white = list() #record the while chessman
   repeat {
     for (j in 1:2) {
       repeat {
@@ -32,20 +32,22 @@ gomoku <- function(n = 19) {
       playedlist <- c(playedlist, xy) #add the step to the playlist if it is successfully played
       points(l, cex = 3, pch = c(19, 21)[j], bg = c("black", "white")[j]) #draw the step (black first)
                                                                           #black as solid circle, while as filled circle
+      #check the black chessmen
       if(j == 1){
-        black[[i]] = c(l$x, l$y)
-        win = sapply(black, judge_five, black)
+        black[[i]] = c(l$x, l$y)#update the black chessmen set
+        win = sapply(black, judge_five, black)#check if there are five continuous points in black chessmen set
         if(is.element(1, win)){
-          cat("Black Wins!\n")
+          cat("Black Wins!\n") #if there are, game over, black wins
           return(-1)
         }
       }
 
+      #check the white chessman
       if(j == 2){
-        white[[i]] = c(l$x, l$y)
-        win = sapply(white, judge_five, white)
+        white[[i]] = c(l$x, l$y)#update the white chessmen set
+        win = sapply(white, judge_five, white)#check if there are give continuous points in white set
         if(is.element(1, win)){
-          cat("White Wins!\n")
+          cat("White Wins!\n")#If there are, game over, white wins
           return(-1)
         }
       }
@@ -57,25 +59,32 @@ gomoku <- function(n = 19) {
   }
 }
 
+##Judging if there is a winner
 judge_five = function(x, location){
+  #line1 is a y=x kind of line, the point x is the middle of the five points
   x1 = c((x[1]-2):(x[1]+2))
   y1 = c((x[2]-2):(x[2]+2))
   line1 = line(x1, y1)
-
+  
+  #line2 is a y=-x kind of line, the point x is the middle of the five points
   x2 = x1
   y2 = rev(y1)
   line2 = line(x2, y2)
-
+  
+  #line3 is a horizontal line, the point x is the middle of the five points
   x3 = rep(x[1], 5)
   y3 = y1
   line3 = line(x3, y3)
-
+  
+  #line4 is a vertical line, the point x is the middle of the five points
   x4 = x1
   y4 = rep(x[2], 5)
   line4 = line(x4, y4)
 
+  #save the lines in a list
   line = list(line1, line2, line3, line4)
-
+  
+  #check if there are five continuous points in the set
   for(i in 1:4){
     judge = sum(is.element(line[[i]], location))
     if (judge == 5)
@@ -85,7 +94,7 @@ judge_five = function(x, location){
   }
 }
 
-
+##Generate five points based on their x-value and y-value
 line = function(x,y){
   a = list()
   for(i in 1:5){
