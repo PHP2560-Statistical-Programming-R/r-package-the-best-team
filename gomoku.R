@@ -1,7 +1,7 @@
 gomoku <- function(n = 19) {
 
 
-  if (!interactive()) return()
+  if (!interactive()) return() #check if R is running interactively; if not, quit the game
   
 #Setting of the game
   par(mar = rep(0, 4)) #No blank space for the main plot and the margin of plot
