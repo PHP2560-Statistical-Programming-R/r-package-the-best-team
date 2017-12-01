@@ -1,34 +1,37 @@
 gomoku <- function(n = 19) {
 
-  if (.Platform$OS.type == "windows")
-    x11() else x11(type = "Xlib")
 
   if (!interactive()) return()
-  par(mar = rep(0, 4))
+  
+#Setting of the game
+  par(mar = rep(0, 4)) #No blank space for the main plot and the margin of plot
   plot(1:n, type = "n", xlim = c(1, n), axes = FALSE, xlab = "",
-       ylab = "", bty = "o", lab = c(n, n, 1))
-  segments(1, 1:n, n, 1:n)
-  segments(1:n, 1, 1:n, n)
+       ylab = "", bty = "o", lab = c(n, n, 1))#add points to the plot where the lines should be located
+  segments(1, 1:n, n, 1:n)#draw horizontal lines
+  segments(1:n, 1, 1:n, n)#draw vertical lines
   points(rep(c(4, 10, 16), 3), rep(c(4, 10, 16), each = 3),
-         pch = 19, cex = 1.2)
-  box()
-  playedlist <- NULL
-  i <- 1
+         pch = 19, cex = 1.2)#draw the black point with the shape of solid circle
+  box() #draw the outline of the plot
+  
+  
+#Playing the game
+  playedlist <- NULL #record the points have been stepped on
+  i <- 1 #rounds that will have be played
   black = list()
   white = list()
   repeat {
     for (j in 1:2) {
       repeat {
-        l <- locator(1)
-        l$x <- min(n, max(1, round(l$x)))
-        l$y <- min(n, max(1, round(l$y)))
-        xy <- paste(l, collapse = ":")
-        if (!is.element(xy, playedlist))
+        l <- locator(1) #record the location where the mouse clicks
+        l$x <- min(n, max(1, round(l$x))) #modify the x-location to where nearest point
+        l$y <- min(n, max(1, round(l$y))) #modify the y-location to where nearest point
+        xy <- paste(l, collapse = ":") #record the step
+        if (!is.element(xy, playedlist)) #break when the point had chessman on it
           break
       }
-      playedlist <- c(playedlist, xy)
-      points(l, cex = 3, pch = c(19, 21)[j], bg = c("black", "white")[j])
-
+      playedlist <- c(playedlist, xy) #add the step to the playlist if it is successfully played
+      points(l, cex = 3, pch = c(19, 21)[j], bg = c("black", "white")[j]) #draw the step (black first)
+                                                                          #black as solid circle, while as filled circle
       if(j == 1){
         black[[i]] = c(l$x, l$y)
         win = sapply(black, judge_five, black)
@@ -47,10 +50,10 @@ gomoku <- function(n = 19) {
         }
       }
 
-      if (2*(i) >= n^2) break
+      if (2*(i) >= n^2) break #break when the chessboard has been filled
     }
-    i = i+1
-    if (2*(i-1) >= n^2) break
+    i = i+1 #enter the next round
+    if (2*(i-1) >= n^2) break #bread when the chessboard has been filled
   }
 }
 
