@@ -45,8 +45,9 @@ gomoku <- function(n = 19) {
       
       #computer play
       new = computer_play(player, computer, playedlist, n)
-      l$x = new$1[1]
-      l$y = new$1[2]
+      new = unlist(new)
+      l$x = new[1]
+      l$y = new[2]
       xy <- paste(l, collapse = ":")
       playedlist <- c(playedlist, xy)
       points(l, cex = 3*19/n, pch = c(19, 21)[3-choose], bg = c("black", "white")[3-choose]) #draw the step (black first)
@@ -64,8 +65,9 @@ gomoku <- function(n = 19) {
       else{
         #computer play
         new = computer_play(player, computer, playedlist, n)
-        l$x = new$1[1]
-        l$y = new$1[2]
+        new = unlist(new)
+        l$x = new[1]
+        l$y = new[2]
         xy <- paste(l, collapse = ":")
         playedlist <- c(playedlist, xy)
         points(l, cex = 3*19/n, pch = c(19, 21)[3-choose], bg = c("black", "white")[3-choose]) #draw the step (black first)
