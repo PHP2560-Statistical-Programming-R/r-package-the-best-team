@@ -11,7 +11,7 @@ gomoku <- function(n = 19) {
        ylab = "", bty = "o", lab = c(n, n, 1))#add points to the plot where the lines should be located
   segments(1, 1:n, n, 1:n)#draw horizontal lines
   segments(1:n, 1, 1:n, n)#draw vertical lines
-  temp = c(round((n+1)/5),(n+1)/2, as.integer(4*(n+1)/5),round(4*(n+1)/5))
+  temp = c(round((n+1)/5),(n+1)/2, round(4*(n+1)/5),round(4*(n+1)/5))
   points(rep(temp, 3), rep(temp, each = 3),
          pch = 19, cex = 6/sqrt(n))#draw the black point with the shape of solid circle
   box() #draw the outline of the plot
@@ -38,7 +38,11 @@ gomoku <- function(n = 19) {
       #check the black chessmen
       if(j == 1){
         black[[i]] = c(l$x, l$y)#update the black chessmen set
+        
         win = sapply(black, judge_five, black)#check if there are five continuous points in black chessmen set
+        print(black)
+        print(win)
+        temp = sapply(win, length)
         if(is.element(1, win)){
           cat("Black Wins!\n") #if there are, game over, black wins
           return(-1)
@@ -48,8 +52,9 @@ gomoku <- function(n = 19) {
       #check the white chessman
       if(j == 2){
         white[[i]] = c(l$x, l$y)#update the white chessmen set
-        win = sapply(white, judge_five, white)#check if there are give continuous points in white set
-        if(is.element(1, win)){
+        win = lapply(white, judge_five, white)#check if there are give continuous points in white set
+        temp = sapply(win, length)
+        if(is.element(2, temp)){
           cat("White Wins!\n")#If there are, game over, white wins
           return(-1)
         }
@@ -67,22 +72,22 @@ judge_five = function(x, location){
   #line1 is a y=x kind of line, the point x is the middle of the five points
   x1 = c((x[1]-2):(x[1]+2))
   y1 = c((x[2]-2):(x[2]+2))
-  line1 = line(x1, y1)
+  line1 = make_line(x1, y1)
   
   #line2 is a y=-x kind of line, the point x is the middle of the five points
   x2 = x1
   y2 = rev(y1)
-  line2 = line(x2, y2)
+  line2 = make_line(x2, y2)
   
   #line3 is a horizontal line, the point x is the middle of the five points
   x3 = rep(x[1], 5)
   y3 = y1
-  line3 = line(x3, y3)
+  line3 = make_line(x3, y3)
   
   #line4 is a vertical line, the point x is the middle of the five points
   x4 = x1
   y4 = rep(x[2], 5)
-  line4 = line(x4, y4)
+  line4 = make_line(x4, y4)
 
   #save the lines in a list
   line = list(line1, line2, line3, line4)
@@ -98,9 +103,9 @@ judge_five = function(x, location){
 }
 
 ##Generate five points based on their x-value and y-value
-line = function(x,y){
+make_line = function(x,y){
   a = list()
-  for(i in 1:5){
+  for(i in 1:length(x)){
     a[[i]] = c(x[i],y[i])
   }
   return(a)
