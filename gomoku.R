@@ -40,8 +40,8 @@ gomoku <- function(n = 19) {
         black[[i]] = c(l$x, l$y)#update the black chessmen set
         
         win = lapply(black, judge, 5, black)#check if there are five continuous points in black chessmen set
-        temp = sapply(win, length)
-        if(is.element(3, temp)){
+        temp = sapply(win, is.list)
+        if(is.element(1, temp)){
           cat("Black Wins!\n") #if there are, game over, black wins
           return(-1)
         }
@@ -51,8 +51,8 @@ gomoku <- function(n = 19) {
       if(j == 2){
         white[[i]] = c(l$x, l$y)#update the white chessmen set
         win = lapply(white, judge, 5, white)#check if there are give continuous points in white set
-        temp = sapply(win, length)
-        if(is.element(3, temp)){
+        temp = sapply(win, is.list)
+        if(is.element(1, temp)){
           cat("White Wins!\n")#If there are, game over, white wins
           return(-1)
         }
