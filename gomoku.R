@@ -2,6 +2,8 @@ gomoku <- function(n = 19) {
 
 
   if (!interactive()) return() #check if R is running interactively; if not, quit the game
+  if(n < 5) stop("Hmm, n is too small for the game to play!")
+  if(n %% 2 < 1) stop("Sorry, n must be a odd number!")
   
 #Setting of the game
   par(mar = rep(0, 4)) #No blank space for the main plot and the margin of plot
@@ -9,8 +11,9 @@ gomoku <- function(n = 19) {
        ylab = "", bty = "o", lab = c(n, n, 1))#add points to the plot where the lines should be located
   segments(1, 1:n, n, 1:n)#draw horizontal lines
   segments(1:n, 1, 1:n, n)#draw vertical lines
-  points(rep(c(4, 10, 16), 3), rep(c(4, 10, 16), each = 3),
-         pch = 19, cex = 1.2)#draw the black point with the shape of solid circle
+  temp = c(round((n+1)/5),(n+1)/2, as.integer(4*(n+1)/5),round(4*(n+1)/5))
+  points(rep(temp, 3), rep(temp, each = 3),
+         pch = 19, cex = 6/sqrt(n))#draw the black point with the shape of solid circle
   box() #draw the outline of the plot
   
   
@@ -30,7 +33,7 @@ gomoku <- function(n = 19) {
           break
       }
       playedlist <- c(playedlist, xy) #add the step to the playlist if it is successfully played
-      points(l, cex = 3, pch = c(19, 21)[j], bg = c("black", "white")[j]) #draw the step (black first)
+      points(l, cex = 3*19/n, pch = c(19, 21)[j], bg = c("black", "white")[j]) #draw the step (black first)
                                                                           #black as solid circle, while as filled circle
       #check the black chessmen
       if(j == 1){
@@ -51,7 +54,7 @@ gomoku <- function(n = 19) {
           return(-1)
         }
       }
-
+      j = j+1 #swith color
       if (2*(i) >= n^2) break #break when the chessboard has been filled
     }
     i = i+1 #enter the next round
