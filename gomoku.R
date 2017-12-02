@@ -39,11 +39,9 @@ gomoku <- function(n = 19) {
       if(j == 1){
         black[[i]] = c(l$x, l$y)#update the black chessmen set
         
-        win = sapply(black, judge_five, black)#check if there are five continuous points in black chessmen set
-        print(black)
-        print(win)
+        win = lapply(black, judge, 5, black)#check if there are five continuous points in black chessmen set
         temp = sapply(win, length)
-        if(is.element(1, win)){
+        if(is.element(3, temp)){
           cat("Black Wins!\n") #if there are, game over, black wins
           return(-1)
         }
@@ -52,9 +50,9 @@ gomoku <- function(n = 19) {
       #check the white chessman
       if(j == 2){
         white[[i]] = c(l$x, l$y)#update the white chessmen set
-        win = lapply(white, judge_five, white)#check if there are give continuous points in white set
+        win = lapply(white, judge, 5, white)#check if there are give continuous points in white set
         temp = sapply(win, length)
-        if(is.element(2, temp)){
+        if(is.element(3, temp)){
           cat("White Wins!\n")#If there are, game over, white wins
           return(-1)
         }
@@ -71,7 +69,9 @@ gomoku <- function(n = 19) {
 judge_five = function(x, location){
   #line1 is a y=x kind of line, the point x is the middle of the five points
   x1 = c((x[1]-2):(x[1]+2))
+  x1 = as.double(x1)
   y1 = c((x[2]-2):(x[2]+2))
+  y1 = as.double(y1)
   line1 = make_line(x1, y1)
   
   #line2 is a y=-x kind of line, the point x is the middle of the five points

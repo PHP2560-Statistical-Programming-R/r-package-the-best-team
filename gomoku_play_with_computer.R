@@ -1,33 +1,34 @@
 judge = function(x, num, location, location2 = black){
   #line1 is a y=x kind of line, the point x is the middle of the five points
   x1 = c(x[1]:(x[1]+num-1))
+  x1 = as.double(x1)
   y1 = c(x[2]:(x[2]+num-1))
-  line1 = line(x1, y1)
+  y1 = as.double(y1)
+  line1 = make_line(x1, y1)
   
   #line2 is a y=-x kind of line, the point x is the middle of the five points
   x2 = x1
-  y2 = rev(y1)
-  line2 = line(x2, y2)
+  y2 = c(x[2]:(x[2]-num+1))
+  line2 = make_line(x2, y2)
   
   #line3 is a horizontal line, the point x is the middle of the five points
   x3 = rep(x[1], num)
   y3 = y1
-  line3 = line(x3, y3)
+  line3 = make_line(x3, y3)
   
   #line4 is a vertical line, the point x is the middle of the five points
   x4 = x1
   y4 = rep(x[2], num)
-  line4 = line(x4, y4)
+  line4 = make_line(x4, y4)
   
   #save the lines in a list
   line = list(line1, line2, line3, line4)
   
   #check if there are five continuous points in the set
   for(i in 1:4){
-    print(line[[1]])
     judge = sum(is.element(line[[i]], location))
     if (judge == num)
-      return(1)
+      return(list(num, i, x))
     if(i == 4)
       return(0)
   }
