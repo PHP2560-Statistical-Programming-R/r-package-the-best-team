@@ -56,8 +56,9 @@ gomoku <- function(n = 19) {
           cat("White Wins!\n")#If there are, game over, white wins
           return(-1)
         }
+       
       }
-      j = j+1 #swith color
+      
       if (2*(i) >= n^2) break #break when the chessboard has been filled
     }
     i = i+1 #enter the next round

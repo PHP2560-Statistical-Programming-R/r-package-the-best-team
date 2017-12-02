@@ -1,27 +1,54 @@
-#Generate the next location
-get_4 = get_function(4, black, white)
-if(get_4 == 0){get_3 = get_function(3, black, white)} else{new = get_4}
-if(get_3 == 0){get_2 = get_function(2, black, white)} else{new = get_3}
-if(get_2 == 0){get_1 = get_function(1, black, white)} else{new = get_2}
-if(get_1 == 0){
-  repeat{
-    new = c(sample(1:n,1),sample(1:n,1))
-    xy <- paste(new, collapse = ":") #record the step
+#check if wins
+if_win = function(set){
+win = lapply(set, judge, 5, set)#check if there are five continuous points in black chessmen set
+temp = sapply(win, is.list)
+return(is.element(1, temp))
+}
+
+#player play
+player_play = function(playlist, n){
+  repeat {
+    l <- locator(1) #record the location where the mouse clicks
+    l$x <- min(n, max(1, round(l$x))) #modify the x-location to where nearest point
+    l$y <- min(n, max(1, round(l$y))) #modify the y-location to where nearest point
+    xy <- paste(l, collapse = ":") #record the step
     if (!is.element(xy, playedlist)) #break when the point had chessman on it
       break
-  } else{new = get_1}
+  }
+  return(l)
 }
+
+#computer play
+computer_play = function(player, computer, playlist, n){
+  get_4 = get_function(4, player, computer)
+  if(!is.list(get_4)){get_3 = get_function(3, player, computer, n)} else{new = get_4}
+  if(!is.list(get_3)){get_2 = get_function(2, player, computer, n)} else{new = get_3}
+  if(!is.list(get_3)){get_1 = get_function(1, player, computer, n)} else{new = get_2}
+  if(!is.list(get_1)){
+    repeat{
+      new = list(c(sample(1:n,1),sample(1:n,1)))
+      xy <- paste(new, collapse = ":") #record the step
+      if (!is.element(xy, playedlist)) #break when the point had chessman on it
+        break
+       } }
+  else{new = get_1}
+  print(new)
+  return(new)
+}
+  
+
 
 
 #Get the avalible spot; if not available , return 0
-get_function = function(num, set1, set2){
+get_function = function(num, set1, set2, n){
   get_num = lapply(set1, judge, num, set1)
   temp = sapply(get_num, is.list)
   if(is.element(1, temp)){
-    get_list = get_4[[which(temp == 1)]]
-    get_vector = check_blank(get_list[[1]], get_list[[2]], get_list[[3]], set2)
+    get_list = get_num[[which(temp == 1)]]
+    get_vector = check_blank(get_list[[1]], get_list[[2]], get_list[[3]], set2, n)
   } else {return (0)}
   return(get_vector)
+  print(get_vector)
 }
 
 
@@ -63,7 +90,7 @@ judge = function(x, num, location){
 }
 
 #Check if the near points are filled
-check_blank = function(num_point, index, point, location){
+check_blank = function(num_point, index, point, location, n){
   i = num_point
   x = point
   if(index == 1)
