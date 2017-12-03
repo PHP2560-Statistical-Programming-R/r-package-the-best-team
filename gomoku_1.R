@@ -17,6 +17,7 @@ gomoku <- function(n = 19) {
   box() #draw the outline of the plot
   
   
+  
   #Playing the game
   playedlist <- c("0:0") #record the points have been stepped on
   i <- 1 #rounds that will have be played
@@ -37,6 +38,7 @@ gomoku <- function(n = 19) {
       
       #check if player wins
       player[[i]] = c(l$x, l$y)
+      print(player)
       if(if_win(player)){
         cat("Player Wins!\n") #if there are, game over, black wins
         return(-1)

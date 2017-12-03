@@ -1,8 +1,7 @@
 #check if wins
 if_win = function(set){
-win = lapply(set, judge, 5, set)#check if there are five continuous points in black chessmen set
-temp = sapply(win, is.list)
-return(is.element(1, temp))
+win = sapply(set, judge, 5, set)#check if there are five continuous points in black chessmen set
+return(is.element(1, win))
 }
 
 #player play
@@ -12,7 +11,7 @@ player_play = function(playlist, n){
     l$x <- min(n, max(1, round(l$x))) #modify the x-location to where nearest point
     l$y <- min(n, max(1, round(l$y))) #modify the y-location to where nearest point
     xy <- paste(l, collapse = ":") #record the step
-    if (!is.element(xy, playedlist)) #break when the point had chessman on it
+    if (!is.element(xy, playlist)) #break when the point had chessman on it
       break
   }
   return(l)
@@ -20,19 +19,17 @@ player_play = function(playlist, n){
 
 #computer play
 computer_play = function(player, computer, playlist, n){
-  get_4 = get_function(4, player, computer)
-  if(!is.list(get_4)){get_3 = get_function(3, player, computer, n)} else{new = get_4}
-  if(!is.list(get_3)){get_2 = get_function(2, player, computer, n)} else{new = get_3}
-  if(!is.list(get_3)){get_1 = get_function(1, player, computer, n)} else{new = get_2}
+  get_4 = get_function(4, player, computer, n)
+  if(!is.list(get_4)){get_3 = get_function(3, player, computer, n)} else{return(get_4)}
+  if(!is.list(get_3)){get_2 = get_function(2, player, computer, n)} else{return(get_3)}
+  if(!is.list(get_2)){get_1 = get_function(1, player, computer, n)} else{return(get_2)}
   if(!is.list(get_1)){
     repeat{
       new = list(c(sample(1:n,1),sample(1:n,1)))
       xy <- paste(new, collapse = ":") #record the step
-      if (!is.element(xy, playedlist)) #break when the point had chessman on it
+      if (!is.element(xy, playlist)) #break when the point had chessman on it
         break
-       } }
-  else{new = get_1}
-  print(new)
+       } }else{return(get_1)}
   return(new)
 }
   
@@ -41,19 +38,19 @@ computer_play = function(player, computer, playlist, n){
 
 #Get the avalible spot; if not available , return 0
 get_function = function(num, set1, set2, n){
-  get_num = lapply(set1, judge, num, set1)
+  get_num = lapply(set1, judge, num, set1, set2, n)
   temp = sapply(get_num, is.list)
   if(is.element(1, temp)){
-    get_list = get_num[[which(temp == 1)]]
-    get_vector = check_blank(get_list[[1]], get_list[[2]], get_list[[3]], set2, n)
+    equal_to_one = which(temp == 1)
+    get_one = sample(1:length(equal_to_one),1)
+    get_list = get_num[[equal_to_one[get_one]]]
   } else {return (0)}
-  return(get_vector)
-  print(get_vector)
+  return(get_list)
 }
 
 
 #Check if there are num continuous points
-judge = function(x, num, location){
+judge = function(x, num, set1, set2, n){
   #line1 is a y=x kind of line, the point x is the middle of the five points
   x1 = c(x[1]:(x[1]+num-1))
   x1 = as.double(x1)
@@ -81,9 +78,15 @@ judge = function(x, num, location){
   
   #check if there are five continuous points in the set
   for(i in 1:4){
-    judge = sum(is.element(line[[i]], location))
-    if (judge == num)
-      return(list(num, i, x))
+    judge = sum(is.element(line[[i]], set1))
+    if(num == 5){
+      if (judge == num)
+        return(1)
+    } else{
+      temp = check_blank(num, i, x, set2, n)
+      if(judge == num & is.list(temp))
+        return(temp)
+    }
     if(i == 4)
       return(0)
   }
@@ -113,8 +116,8 @@ check_blank = function(num_point, index, point, location, n){
   }
   if(index == 3)
   {
-    left = list(c(x[1], x[2]+1))
-    right = list(c(x[1], x[2]-i))
+    left = list(c(x[1], x[2]-1))
+    right = list(c(x[1], x[2]+i))
     if(!is.element(left, location) & boundary(left, n))
       return(left)
     if(!is.element(right, location) & boundary(right, n))
