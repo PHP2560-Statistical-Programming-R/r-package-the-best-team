@@ -57,7 +57,7 @@ mine_sweeper_1 <- function(width, height, mines, cheat = FALSE) {
   width <- floor(width)
   height <- floor(height)
   mines <- floor(mines)
-
+  
   m <- rep(0, width * height)
   # Status: 0 for untested areas, 1 for tested areas, 2 for flags
   mat.status <- matrix(m, height, width)
@@ -76,7 +76,7 @@ mine_sweeper_1 <- function(width, height, mines, cheat = FALSE) {
   mine.mat <- ifelse(mine.mat < 0, -1, mine.mat)
   # -1 for mines
   if (cheat) print(mine.mat)
-
+  
   # Plot a grid
   plot.grid <- function(x, y, w = 1, h = 1, col1 = "#D6E3F0", col2 = "#92B0CA", slices = 10) {
     # Generate contiguous colors
@@ -109,12 +109,12 @@ mine_sweeper_1 <- function(width, height, mines, cheat = FALSE) {
     polygon(x + c(-0.5, -0.5, 0.5, 0.5) * w, y + c(-0.5, 0.5, 0.5, -0.5) * h,
             border = "#777777")
   }
-
+  
   # Plot the interface
   par(mar = c(0, 0, 0, 0), bg = "#DDDDDD")
   plot(1, type = "n", asp = 1, xlab = "", ylab = "",
        xlim = c(0.5, width + 0.5), ylim = c(0.5, height + 0.5), axes = FALSE)
-
+  
   # Set font for X11 device
   if(.Device == "X11") {
     fixed <- X11Font("-*-fixed-*-*-*-*-*-*-*-*-*-*-*-*")
@@ -128,7 +128,7 @@ mine_sweeper_1 <- function(width, height, mines, cheat = FALSE) {
   y0 <- rep(0.5, width - 1)
   y1 <- y0 + height
   segments(x0, y0, x1, y1, col = "#777777")
-
+  
   # Colors to draw numbers
   col.palette <- c("DarkBlue", "ForestGreen", "brown", "green",
                    "blue", "yellow", "orange", "red")
@@ -187,7 +187,7 @@ mine_sweeper_1 <- function(width, height, mines, cheat = FALSE) {
     zeroes <- intersect(areas, which(mat == 0))
     return(list(zeroes = zeroes, areas = areas))
   }
-
+  
   mousedown <- function(buttons, x, y) {
     ## At least under Ubuntu, right click leads to buttons = c(0, 1)
     if (length(buttons) == 2) buttons <- 2
@@ -207,7 +207,7 @@ mine_sweeper_1 <- function(width, height, mines, cheat = FALSE) {
         if (current.mat == -1) {
           plot.mine(mine.col, height + 1 - mine.row)
           plot.mine.explode(plx, ply)
-          cat("Game Over!\n Want another one?")
+          cat("Game Over!\n Want another one?\n")
           answer()
           return(-1)
           ## Blank area
@@ -228,7 +228,7 @@ mine_sweeper_1 <- function(width, height, mines, cheat = FALSE) {
           }
           if (sum(ms == 1) == width * height - mines) {
             plot.flag(mine.col, height + 1 - mine.row)
-            cat("You win!\n Want another one?")
+            cat("You win!\n Want another one?\n")
             answer()
             return(1)
           }
@@ -238,7 +238,7 @@ mine_sweeper_1 <- function(width, height, mines, cheat = FALSE) {
           plot.num(plx, ply, current.mat)
           if (sum(ms == 1) == width * height - mines -1) {
             plot.flag(mine.col, height + 1 - mine.row)
-            cat("You win!\n Want another one?")
+            cat("You win!\n Want another one?\n")
             answer()
             return(1)
           }
@@ -269,7 +269,7 @@ mine_sweeper_1 <- function(width, height, mines, cheat = FALSE) {
     }
     return(ms)
   }
-
+  
   while (TRUE) {
     if (length(mat.status) == 1) break
     mat.status <- getGraphicsEvent(prompt = "", onMouseDown = mousedown)
@@ -296,11 +296,14 @@ answer <- function ()  {
   ans <- result()
   Check <- c("Y", "N")
   if (is.null(ans$a)) {
-     message("That's not an answer \n Type Y or N")
-    }
-    ans.feed <- match.arg(ans$a, Check)
-    switch(ans.feed,
-           Y = restart(),
-           N = graphics.off())
+    message("That's not an answer \n Type Y or N")
+  }
+  ans.feed <- match.arg(ans$a, Check)
+  switch(ans.feed,
+         Y = restart(),
+         N = graphics.off()
+  )
+  stop("Come on! Just one more! PLZ!")
 }
+
 
