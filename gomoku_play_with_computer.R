@@ -77,7 +77,9 @@ judge = function(x, num, set1, set2, n){
   line = list(line1, line2, line3, line4)
   
   #check if there are five continuous points in the set
-  for(i in 1:4){
+  random = sample(c(1:4))
+  j = 1
+  for(i in random){
     judge = sum(is.element(line[[i]], set1))
     if(num == 5){
       if (judge == num)
@@ -87,7 +89,8 @@ judge = function(x, num, set1, set2, n){
       if(judge == num & is.list(temp))
         return(temp)
     }
-    if(i == 4)
+    j = j+1
+    if(j == 4)
       return(0)
   }
 }
