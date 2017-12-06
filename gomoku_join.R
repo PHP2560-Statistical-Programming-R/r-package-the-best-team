@@ -23,6 +23,7 @@ gomoku = function(n = 19){
     }
   gameover(result = result)
   repeat{
+    options(locatorBell = FALSE)
     l = locator(1)
     x = l$x
     y = l$y
@@ -35,6 +36,7 @@ gomoku = function(n = 19){
 first_choose = function(){
   stage0()
   repeat{
+    options(locatorBell = FALSE)
     l = locator(1)
     x = l$x
     y = l$y
@@ -47,6 +49,7 @@ first_choose = function(){
 second_choose = function(){
   stage1()
   repeat{
+    options(locatorBell = FALSE)
     l = locator(1)
     x = l$x
     y = l$y
