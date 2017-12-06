@@ -39,8 +39,7 @@ gomoku_self <- function(n = 19) {
       if(j == 1){
         black[[i]] = c(l$x, l$y)#update the black chessmen set
         if(if_win(black)){
-          cat("Black Wins!\n") #if there are, game over, black wins
-          return(-1)
+          return("Black Wins!")
         }
       }
 
@@ -48,8 +47,7 @@ gomoku_self <- function(n = 19) {
       if(j == 2){
         white[[i]] = c(l$x, l$y)#update the white chessmen set
         if(if_win(white)==1){
-          cat("White Wins!\n")#If there are, game over, white wins
-          return(-1)
+          return("White Wins!")
         }
        
       }
