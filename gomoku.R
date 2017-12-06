@@ -4,7 +4,8 @@ gomoku <- function(n = 19) {
   if (!interactive()) return() #check if R is running interactively; if not, quit the game
   if(n < 5) stop("Hmm, n is too small for the game to play!")
   if(n %% 2 < 1) stop("Sorry, n must be a odd number!")
-  
+  if (.Platform$OS.type == "windows") 
+    x11() else x11(type = "Xlib")
 #Setting of the game
   par(mar = rep(0, 4)) #No blank space for the main plot and the margin of plot
   plot(1:n, type = "n", xlim = c(1, n), axes = FALSE, xlab = "",

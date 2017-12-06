@@ -83,7 +83,7 @@ judge = function(x, num, set1, set2, n){
       if (judge == num)
         return(1)
     } else{
-      temp = check_blank(num, i, x, set2, n)
+      temp = check_blank(num, i, x, set2, set1, n)
       if(judge == num & is.list(temp))
         return(temp)
     }
@@ -93,42 +93,42 @@ judge = function(x, num, set1, set2, n){
 }
 
 #Check if the near points are filled
-check_blank = function(num_point, index, point, location, n){
+check_blank = function(num_point, index, point, location, location2, n){
   i = num_point
   x = point
   if(index == 1)
   {
     left = list(c(x[1]-1, x[2]-1))
     right = list(c(x[1]+i, x[2]+i))
-    if(!is.element(left, location) & boundary(left, n))
+    if(!is.element(left, location) & !is.element(left, location2) & boundary(left, n))
       return(left)
-    if(!is.element(right, location) & boundary(right, n))
+    if(!is.element(right, location) & !is.element(right, location2) & boundary(right, n))
       return(right)
   }
   if(index == 2)
   {
     left = list(c(x[1]-1, x[2]+1))
     right = list(c(x[1]+i, x[2]-i))
-    if(!is.element(left, location) & boundary(left, n))
+    if(!is.element(left, location) & !is.element(left, location2) & boundary(left, n))
       return(left)
-    if(!is.element(right, location) & boundary(right, n))
+    if(!is.element(right, location) & !is.element(right, location2) & boundary(right, n))
       return(right)
   }
   if(index == 3)
   {
     left = list(c(x[1], x[2]-1))
     right = list(c(x[1], x[2]+i))
-    if(!is.element(left, location) & boundary(left, n))
+    if(!is.element(left, location) & !is.element(left, location2) & boundary(left, n))
       return(left)
-    if(!is.element(right, location) & boundary(right, n))
+    if(!is.element(right, location) & !is.element(right, location2) & boundary(right, n))
       return(right)
   }
   if(index == 4){
     left = list(c(x[1]-1, x[2]))
     right = list(c(x[1]+i, x[2]))
-    if(!is.element(left, location) & boundary(left, n))
+    if(!is.element(left, location) & !is.element(left, location2) & boundary(left, n))
       return(left)
-    if(!is.element(right, location) & boundary(right, n))
+    if(!is.element(right, location) & !is.element(right, location2) & boundary(right, n))
       return(right)
   }
   return(0)
