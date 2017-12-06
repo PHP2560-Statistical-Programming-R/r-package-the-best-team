@@ -31,9 +31,7 @@ button so that we don't have to call the function over and over again.
 
 (3)Tag cloud function (modified);
 
-(4)Gomoku function (modified):
-
-(5)Maybe add some more depending on the progress...
+(4)Gomoku function (modified).
 
 ## More
 
