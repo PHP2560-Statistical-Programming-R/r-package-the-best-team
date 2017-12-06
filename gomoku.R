@@ -25,6 +25,7 @@ gomoku_self <- function(n = 19) {
   repeat {
     for (j in 1:2) {
       repeat {
+        options(locatorBell = FALSE)
         l <- locator(1) #record the location where the mouse clicks
         l$x <- min(n, max(1, round(l$x))) #modify the x-location to where nearest point
         l$y <- min(n, max(1, round(l$y))) #modify the y-location to where nearest point
