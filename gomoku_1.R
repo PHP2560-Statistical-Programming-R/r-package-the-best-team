@@ -1,11 +1,9 @@
-gomoku <- function(n = 19) {
+gomoku_computer <- function(n = 19, choose) {
   
   
   if (!interactive()) return() #check if R is running interactively; if not, quit the game
   if(n < 5) stop("Hmm, n is too small for the game to play!")
   if(n %% 2 < 1) stop("Sorry, n must be a odd number!")
-  if (.Platform$OS.type == "windows") 
-    x11() else x11(type = "Xlib")
   #Setting of the game
   par(mar = rep(0, 4)) #No blank space for the main plot and the margin of plot
   plot(1:n, type = "n", xlim = c(1, n), axes = FALSE, xlab = "",
@@ -20,6 +18,7 @@ gomoku <- function(n = 19) {
   
   
   #Playing the game
+  l = list()
   playedlist <- c("0:0") #record the points have been stepped on
   i <- 1 #rounds that will have be played
   black = list() #record the black chessman
@@ -41,8 +40,7 @@ gomoku <- function(n = 19) {
       player[[i]] = c(l$x, l$y)
       print(player)
       if(if_win(player)){
-        cat("Player Wins!\n") #if there are, game over, black wins
-        return(-1)
+        return("Player Wins!")
       }
       
       
@@ -60,12 +58,11 @@ gomoku <- function(n = 19) {
       computer[[i]] = c(l$x, l$y)#update the black chessmen set
       
       if(if_win(computer)){
-        cat("Computer Wins!\n") #if there are, game over, black wins
-        return(-1)
+        return("Computer Wins!")
       }
       j = j+2
       }
-      else{
+      if(choose == 2){
         #computer play
         new = computer_play(player, computer, playedlist, n)
         new = unlist(new)
@@ -80,11 +77,10 @@ gomoku <- function(n = 19) {
         computer[[i]] = c(l$x, l$y)#update the black chessmen set
         
         if(if_win(computer)){
-          cat("Computer Wins!\n") #if there are, game over, black wins
-          return(-1)
+          return("Computer Wins!")
         }
         #player play
-        l = player_play(playedlist)
+        l = player_play(playedlist, n)
         xy <- paste(l, collapse = ":")
         playedlist <- c(playedlist, xy) #add the step to the playlist if it is successfully played
         points(l, cex = 3*19/n, pch = c(19, 21)[choose], bg = c("black", "white")[choose]) #draw the step (black first)
@@ -93,8 +89,7 @@ gomoku <- function(n = 19) {
         #check if player wins
         player[[i]] = c(l$x, l$y)
         if(if_win(player)){
-          cat("Player Wins!\n") #if there are, game over, black wins
-          return(-1)
+          return("Player Wins!")
         }
         j = j+2
       }
