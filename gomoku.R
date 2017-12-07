@@ -6,9 +6,11 @@ gomoku_self <- function(n = 19) {
   if(n %% 2 < 1) stop("Sorry, n must be a odd number!")
 
 #Setting of the game
+  img<-readJPEG("wood.jpg")
   par(mar = rep(0, 4)) #No blank space for the main plot and the margin of plot
   plot(1:n, type = "n", xlim = c(1, n), axes = FALSE, xlab = "",
        ylab = "", bty = "o", lab = c(n, n, 1))#add points to the plot where the lines should be located
+  rasterImage(img,0,0,1+n,1+n)
   segments(1, 1:n, n, 1:n)#draw horizontal lines
   segments(1:n, 1, 1:n, n)#draw vertical lines
   temp = c(round((n+1)/5),(n+1)/2, round(4*(n+1)/5),round(4*(n+1)/5))
