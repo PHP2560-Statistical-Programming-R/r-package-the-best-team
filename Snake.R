@@ -14,10 +14,11 @@ init<-function(){
   e$lastx<-e$lasty<-2 ## Initialize the head of the snake
   e$tail<-data.frame(x=c(),y=c()) ## Initialize the tail of the snake
   
-  e$col_furit<-2 ## Fruit color
-  e$col_head<-4 ## Snake head color
-  e$col_tail<-8 ## Snake tail color
-  e$col_path<-0 ## path color
+  e$col_furit<- runif(1,min=1,max=length(colors())) ## Fruit color
+  e$col_head<- runif(1,min=1,max=length(colors()))  ## Snake head color
+  e$col_tail<- runif(1,min=1,max=length(colors()))  ## Snake tail color
+  e$col_path<- 0 ## path color
+  
 }
 
 
@@ -98,6 +99,8 @@ stage1<-function(){
   ## The canvas background
   drawTable<-function(){
     plot(0,0,xlim=c(0,1),ylim=c(0,1),type='n',xaxs="i", yaxs="i")
+    rect(-3, -3, 3, 3, col="cornsilk") ## Background color
+
   }
   
   ## Fill in the data according to the matrix
