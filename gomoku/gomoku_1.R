@@ -40,9 +40,8 @@ gomoku_computer <- function(n = 19, choose) {
       
       #check if player wins
       player[[i]] = c(l$x, l$y)
-      print(player)
       if(if_win(player)){
-        return("Player Wins!")
+        return("You Win!")
       }
       
       
@@ -60,7 +59,7 @@ gomoku_computer <- function(n = 19, choose) {
       computer[[i]] = c(l$x, l$y)#update the black chessmen set
       
       if(if_win(computer)){
-        return("Computer Wins!")
+        return("You Lose!")
       }
       j = j+2
       }
@@ -79,7 +78,7 @@ gomoku_computer <- function(n = 19, choose) {
         computer[[i]] = c(l$x, l$y)#update the black chessmen set
         
         if(if_win(computer)){
-          return("Computer Wins!")
+          return("You Lose!")
         }
         #player play
         l = player_play(playedlist, n)
@@ -91,7 +90,7 @@ gomoku_computer <- function(n = 19, choose) {
         #check if player wins
         player[[i]] = c(l$x, l$y)
         if(if_win(player)){
-          return("Player Wins!")
+          return("You Win!")
         }
         j = j+2
       }

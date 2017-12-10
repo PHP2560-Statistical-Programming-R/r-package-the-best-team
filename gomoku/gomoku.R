@@ -6,17 +6,19 @@ gomoku_self <- function(n = 19) {
   if(n %% 2 < 1) stop("Sorry, n must be a odd number!")
 
 #Setting of the game
-  img<-readJPEG("wood.jpg")
-  par(mar = rep(0, 4)) #No blank space for the main plot and the margin of plot
-  plot(1:n, type = "n", xlim = c(1, n), axes = FALSE, xlab = "",
-       ylab = "", bty = "o", lab = c(n, n, 1))#add points to the plot where the lines should be located
-  rasterImage(img,0,0,1+n,1+n)
-  segments(1, 1:n, n, 1:n)#draw horizontal lines
-  segments(1:n, 1, 1:n, n)#draw vertical lines
+  bg = readJPEG("bg.jpg")
+  x=c(1:n)
+  y=c(1:n)
   temp = c(round((n+1)/5),(n+1)/2, round(4*(n+1)/5),round(4*(n+1)/5))
-  points(rep(temp, 3), rep(temp, each = 3),
-         pch = 19, cex = 6/sqrt(n))#draw the black point with the shape of solid circle
-  box() #draw the outline of the plot
+  ggplot(data =NULL,color = "black") + 
+    annotation_custom(rasterGrob(bg, 
+                                 width = unit(1,"npc"), 
+                                 height = unit(1,"npc")), 
+                      -Inf, Inf, -Inf, Inf)+
+    geom_segment(aes(x, y = rep(1, n), xend = x, yend = rep(n,n)))+
+    geom_segment(aes(x = rep(1,n), y = y, xend = rep(n,n), yend = y))+
+    geom_point(aes(rep(temp, 3), rep(temp, each = 3), size = 6/sqrt(n)), shape = 18, show.legend = F)+
+    theme_void()
   
   
 #Playing the game
