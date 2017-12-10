@@ -29,9 +29,11 @@ button so that we don't have to call the function over and over again.
 
 (2)Mine sweeper function (modified);
 
-(3)Tag cloud function (modified);
+(3)Snake function (modified);
 
-(4)Gomoku function (modified).
+(4)Gomoku function (modified);
+
+(5)(Possible)Tag cloud function (modified);
 
 ## More
 
