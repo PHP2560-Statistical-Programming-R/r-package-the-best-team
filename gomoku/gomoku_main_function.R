@@ -3,20 +3,22 @@ library(png)
 library(jpeg)
 
 
-gomoku = function(n)
+gomoku = function(n = 19)
 {
   click = 0
   result = ""
   
-  #Choose whom to play wit
-    
-    click = first_choose(n)
+    #Choose whom to play wit
+    stage0()
+
+    click = first_choose()
     
     if(click == 1){result = gomoku_self(n)}
     
     
     if(click == 2){
       #Choose color
+      stage1()
       click = second_choose()
     
       if(click == 3){result = gomoku_computer(n, choose = 1)}
@@ -32,33 +34,31 @@ gomoku = function(n)
   gameover(result = result, img = img)
   repeat{
     options(locatorBell = FALSE)
-    l = locator(1)
+    l=locator(1)
     x = l$x
     y = l$y
-    if(x>40 & x<60 & y>8 & y<16){
+    if(x>40 & x<60 & y>8 & y<16){return("Game Closed")}
+    if(x>32 & x<69 & y>23 & y<31){
       dev.off()
       gomoku(n)
     }
-    if(x>32 & x<69 & y>23 & y<31){return("Game Closed")}
   }
 }
   
 
 first_choose = function(){
-  stage0()
   repeat{
     options(locatorBell = FALSE)
     l = locator(1)
     x = l$x
     y = l$y
-    if(x>37 & x<63 & y>23 & y<31){print(1)}
-    if(x>30 & x<70 & y>8 & y<16){print(2)}
+    if(x>37 & x<63 & y>23 & y<31){return(1)}
+    if(x>30 & x<70 & y>8 & y<16){return(2)}
   }
 }
 
 
 second_choose = function(){
-  stage1()
   repeat{
     options(locatorBell = FALSE)
     l = locator(1)
@@ -68,6 +68,5 @@ second_choose = function(){
     if(x>39 & x<61 & y>8 & y<16){return(4)}
   }
 }
-
 
 

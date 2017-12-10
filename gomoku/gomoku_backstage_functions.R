@@ -1,6 +1,42 @@
+judge_five = function(x, location){
+  #line1 is a y=x kind of line, the point x is the middle of the five points
+  x1 = c((x[1]-2):(x[1]+2))
+  x1 = as.double(x1)
+  y1 = c((x[2]-2):(x[2]+2))
+  y1 = as.double(y1)
+  line1 = make_line(x1, y1)
+  
+  #line2 is a y=-x kind of line, the point x is the middle of the five points
+  x2 = x1
+  y2 = rev(y1)
+  line2 = make_line(x2, y2)
+  
+  #line3 is a horizontal line, the point x is the middle of the five points
+  x3 = rep(x[1], 5)
+  y3 = y1
+  line3 = make_line(x3, y3)
+  
+  #line4 is a vertical line, the point x is the middle of the five points
+  x4 = x1
+  y4 = rep(x[2], 5)
+  line4 = make_line(x4, y4)
+  
+  #save the lines in a list
+  line = list(line1, line2, line3, line4)
+  
+  #check if there are five continuous points in the set
+  for(i in 1:4){
+    judge = sum(is.element(line[[i]], location))
+    if (judge == 5)
+      return(1)
+    if(i == 4)
+      return(0)
+  }
+}
+
 #check if wins
 if_win = function(set){
-win = sapply(set, judge, 5, set)#check if there are five continuous points in black chessmen set
+win = sapply(set, judge_five, set)#check if there are five continuous points in black chessmen set
 return(is.element(1, win))
 }
 
@@ -8,7 +44,7 @@ return(is.element(1, win))
 player_play = function(playlist, n){
   repeat {
     options(locatorBell = FALSE)
-    l <- locator(1) #record the location where the mouse clicks
+    l = locator(1)
     l$x <- min(n, max(1, round(l$x))) #modify the x-location to where nearest point
     l$y <- min(n, max(1, round(l$y))) #modify the y-location to where nearest point
     xy <- paste(l, collapse = ":") #record the step
@@ -38,7 +74,7 @@ computer_play = function(player, computer, playlist, n){
 
 
 #Get the avalible spot; if not available , return 0
-get_function = function(num, set1, set2, n){
+get_function = function(num, set1, set2 = NULL, n = NULL){
   get_num = lapply(set1, judge, num, set1, set2, n)
   temp = sapply(get_num, is.list)
   if(is.element(1, temp)){
@@ -51,12 +87,10 @@ get_function = function(num, set1, set2, n){
 
 
 #Check if there are num continuous points
-judge = function(x, num, set1, set2, n){
+judge = function(x, num, set1, set2 = NULL, n = NULL){
   #line1 is a y=x kind of line, the point x is the middle of the five points
   x1 = c(x[1]:(x[1]+num-1))
-  x1 = as.double(x1)
   y1 = c(x[2]:(x[2]+num-1))
-  y1 = as.double(y1)
   line1 = make_line(x1, y1)
   
   #line2 is a y=-x kind of line, the point x is the middle of the five points
@@ -94,6 +128,16 @@ judge = function(x, num, set1, set2, n){
     if(j == 4)
       return(0)
   }
+}
+
+
+##Generate five points based on their x-value and y-value
+make_line = function(x,y){
+  a = list()
+  for(i in 1:length(x)){
+    a[[i]] = c(x[i],y[i])
+  }
+  return(a)
 }
 
 #Check if the near points are filled
@@ -145,4 +189,13 @@ boundary = function(x, n){
   judge_r = x>n
   if(sum(judge_l)>0 || sum(judge_r)>0){return(0)}
   else{return(1)}
+}
+
+#Convert click to a number version
+convertl = function(l){
+  x = as.double(l$x)*100
+  y = as.double(l$y)*100
+  l$x = x
+  l$y = y
+  return(l)
 }

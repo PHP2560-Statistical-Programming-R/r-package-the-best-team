@@ -111,12 +111,4 @@ gomoku_computer <- function(n = 19, choose) {
 
 
 
-##Generate five points based on their x-value and y-value
-make_line = function(x,y){
-  a = list()
-  for(i in 1:length(x)){
-    a[[i]] = c(x[i],y[i])
-  }
-  return(a)
-}
 
