@@ -57,6 +57,7 @@ gomoku_computer <- function(n = 19, choose) {
       
       #check if computer wins
       computer[[i]] = c(l$x, l$y)#update the black chessmen set
+      print(computer)
       
       if(if_win(computer)){
         return("You Lose!")

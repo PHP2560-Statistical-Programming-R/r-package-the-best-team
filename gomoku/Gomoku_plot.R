@@ -1,3 +1,4 @@
+library(stringr)
 stage0 = function(){
   dev.new()
   n = 100

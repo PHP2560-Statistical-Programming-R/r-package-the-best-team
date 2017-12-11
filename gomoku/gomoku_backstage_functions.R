@@ -116,14 +116,9 @@ judge = function(x, num, set1, set2 = NULL, n = NULL){
   j = 1
   for(i in random){
     judge = sum(is.element(line[[i]], set1))
-    if(num == 5){
-      if (judge == num)
-        return(1)
-    } else{
       temp = check_blank(num, i, x, set2, set1, n)
       if(judge == num & is.list(temp))
         return(temp)
-    }
     j = j+1
     if(j == 4)
       return(0)
@@ -191,11 +186,3 @@ boundary = function(x, n){
   else{return(1)}
 }
 
-#Convert click to a number version
-convertl = function(l){
-  x = as.double(l$x)*100
-  y = as.double(l$y)*100
-  l$x = x
-  l$y = y
-  return(l)
-}
