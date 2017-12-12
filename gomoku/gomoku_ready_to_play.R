@@ -1,0 +1,8 @@
+source("gomoku_backstage_functions.R")
+source("gomoku_battle.R")
+source("gomoku_easy.R")
+source("gomoku_main_function.R")
+source("gomoku_plot.R")
+source("gomoku_scene_design.R")
+source("gomoku_harder.R")
+source("gomoku_hard.R")
