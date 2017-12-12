@@ -77,18 +77,29 @@ make_line = function(x,y){
 
 #computer play
 computer_play = function(player, computer, playlist, n){
+  m = n+1
+  i = 0
   get_4 = get_function(4, player, computer, n)
   if(!is.list(get_4)){get_3 = get_function(3, player, computer, n)} else{return(get_4)}
   if(!is.list(get_3)){get_2 = get_function(2, player, computer, n)} else{return(get_3)}
-  if(!is.list(get_2)){get_1 = get_function(1, player, computer, n)} else{return(get_2)}
-  if(!is.list(get_1)){
+  if(!is.list(get_2)){
     repeat{
-      new = list(c(sample(1:n,1),sample(1:n,1)))
-      xy <- paste(new, collapse = ":") #record the step
-      if (!is.element(xy, playlist)) #break when the point had chessman on it
+      spot = vector()
+      left = m/2 - i
+      right = m/2 +i
+      x = rep(left:right,2*i+1)
+      y = rep(left:right, each = 2*i+1)
+      for(j in 1:length(x)){
+        spot[[j]] = paste(list(x[j],y[j]), collapse = ":")
+      }
+      i = i+1
+      index = is.element(spot, playlist)
+      temp = which(index == 0)
+      if (length(temp)>0) #break when the point had chessman on it
         break
-    } }else{return(get_1)}
-  return(new)
+    } }else{return(get_2)}
+  random = sample(temp,1)
+  return(list(c(x[random],y[random])))
 }
 
 #player play

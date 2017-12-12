@@ -95,13 +95,6 @@ gomoku_computer <- function(n = 19, choose = 1) {
         }
         j = j+2
       }
-  
-      
-      
-      
-      
-      
-      
       if (2*(i) >= n^2) break #break when the chessboard has been filled
 
     i = i+1 #enter the next round
