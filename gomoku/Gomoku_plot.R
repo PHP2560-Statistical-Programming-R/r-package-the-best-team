@@ -6,10 +6,8 @@ stage0 = function(){
   y=c(1:n)
   taiji = readPNG("taiji.png")
   windowsFonts(JP1 = windowsFont("Pristina"))
-         
   bg = readJPEG("bg.jpg")
   colfunc <- colorRampPalette(c("white","goldenrod3", "white","goldenrod3","white"))
-  colfunc1 = colorRampPalette(c("black","gray90"))
   par(mar = rep(0, 4)) #No blank space for the main plot and the margin of plot
   plot(1:n, type = "n", xlim = c(1, n), axes = FALSE, xlab = "",
        ylab = "", bty = "o", lab = c(n, n, 1))
@@ -17,14 +15,14 @@ stage0 = function(){
   rasterImage(bg,0,0,1+n,1+n)
     text(x = seq(32,68, length.out = 6), y=rep(8*n/9,6), col = colfunc(6),
              cex = 3.5, label = unlist(strsplit("GOMOKU", NULL)), family = "JP1", lwd = 2.5)
-    text(x = seq(39,61, length.out = 6), y = rep(28,6), col = colfunc1(6), label = unlist(strsplit("BATTLE",NULL)), family = "JP1", cex =2.5, lwd = 2.5)
-    text(x = seq(33,67, length.out = 8), y = rep(13,8), col = colfunc1(8), family = "JP1", cex = 2.5, label = unlist(strsplit("COMPUTER", NULL)), lwd = 2.5)
+    text(x = 50, y = 28, col = "black", label = "BATTLE", family = "JP1", cex =2.5, lwd = 2.5)
+    text(x = 50, y = 13, col = "white", family = "JP1", cex = 2.5, label = "COMPUTER", lwd = 2.5)
     rasterImage(taiji,30, 35, 70, 75)
 
 }
 
 
-stage1 = function(){
+stage2 = function(){
   taiji = readPNG("taiji.png")
   windowsFonts(JP1 = windowsFont("Pristina"))
           
@@ -45,6 +43,31 @@ stage1 = function(){
     text(x = 50, y = 13, label = "WHITE", col = "white", cex=2.5, family = "JP1", lwd = 2.5)
     rasterImage(taiji,30, 35, 70, 75)
 
+}
+
+stage1 = function(){
+  taiji = readPNG("taiji.png")
+  windowsFonts(JP1 = windowsFont("Pristina"))
+  
+  bg = readJPEG("gomoku/bg.jpg")
+  colfunc <- colorRampPalette(c("white","goldenrod3", "white","goldenrod3","white"))
+  colfunc1 = colorRampPalette(c("black","gray90"))
+  n = 100
+  x=c(1:n)
+  y=c(1:n)
+  par(mar = rep(0, 4)) #No blank space for the main plot and the margin of plot
+  plot(1:n, type = "n", xlim = c(1, n), axes = FALSE, xlab = "",
+       ylab = "", bty = "o", lab = c(n, n, 1))
+  bg = readJPEG("gomoku/wood.jpg")
+  rasterImage(bg,0,0,1+n,1+n)
+  text(x = seq(25,75, length.out = 10), y=rep(8*n/9,10), col = colfunc(10),
+       cex = 3.5, label = unlist(strsplit("DIFFICULTY", NULL)), family = "JP1", lwd = 2.5)
+  text(x = 50, y = 28, label = "EASY", col = "black", family = "JP1", cex = 2.5, lwd = 2.5)
+  text(x = 50, y = 13, label = "HARD", col = "white", cex=2.5, family = "JP1", lwd = 2.5)
+  rasterImage(taiji,30, 35, 70, 75)
+
+  
+  
 }
 
 gameover = function(result, img){

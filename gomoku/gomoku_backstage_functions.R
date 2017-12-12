@@ -91,6 +91,8 @@ judge = function(x, num, set1, set2 = NULL, n = NULL){
   #line1 is a y=x kind of line, the point x is the middle of the five points
   x1 = c(x[1]:(x[1]+num-1))
   y1 = c(x[2]:(x[2]+num-1))
+  x1 = as.double(x1)
+  y1 = as.double(y1)
   line1 = make_line(x1, y1)
   
   #line2 is a y=-x kind of line, the point x is the middle of the five points
@@ -143,46 +145,39 @@ check_blank = function(num_point, index, point, location, location2, n){
   {
     left = list(c(x[1]-1, x[2]-1))
     right = list(c(x[1]+i, x[2]+i))
-    if(!is.element(left, location) & !is.element(left, location2) & boundary(left, n))
-      return(left)
-    if(!is.element(right, location) & !is.element(right, location2) & boundary(right, n))
-      return(right)
   }
   if(index == 2)
   {
     left = list(c(x[1]-1, x[2]+1))
     right = list(c(x[1]+i, x[2]-i))
-    if(!is.element(left, location) & !is.element(left, location2) & boundary(left, n))
-      return(left)
-    if(!is.element(right, location) & !is.element(right, location2) & boundary(right, n))
-      return(right)
   }
   if(index == 3)
   {
     left = list(c(x[1], x[2]-1))
     right = list(c(x[1], x[2]+i))
-    if(!is.element(left, location) & !is.element(left, location2) & boundary(left, n))
-      return(left)
-    if(!is.element(right, location) & !is.element(right, location2) & boundary(right, n))
-      return(right)
   }
   if(index == 4){
     left = list(c(x[1]-1, x[2]))
     right = list(c(x[1]+i, x[2]))
-    if(!is.element(left, location) & !is.element(left, location2) & boundary(left, n))
-      return(left)
-    if(!is.element(right, location) & !is.element(right, location2) & boundary(right, n))
-      return(right)
   }
+  
+  left = list(as.double(unlist(left)))
+  right = list(as.double(unlist(right)))
+  if(!is.element(left, location) & !is.element(left, location2) & within_boundary(left, n))
+    return(left)
+  if(!is.element(right, location) & !is.element(right, location2) & within_boundary(right, n))
+    return(right)
   return(0)
 }
 
+
 #Check if the point is located inside the chessboard
-boundary = function(x, n){
+within_boundary = function(x, n){
   x = unlist(x)
   judge_l = x<1
   judge_r = x>n
   if(sum(judge_l)>0 || sum(judge_r)>0){return(0)}
   else{return(1)}
 }
+
 

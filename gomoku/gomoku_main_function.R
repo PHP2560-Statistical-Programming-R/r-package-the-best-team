@@ -21,9 +21,20 @@ gomoku = function(n = 19)
       stage1()
       click = second_choose()
     
-      if(click == 3){result = gomoku_computer(n, choose = 1)}
-      if(click == 4){result = gomoku_computer(n, choose = 2)}
+      if(click == 3){
+        stage2()
+        click = third_choose()
+        if(click == 5){result = gomoku_easy(choose = 1)}
+        if(click == 6){result = gomoku_easy(choose = 2)}
       }
+      
+      if(click == 4){
+        stage2()
+        click = third_choose()
+        if(click == 5){result = gomoku_hard(choose = 1)}
+        if(click == 6){result = gomoku_hard(choose = 2)}
+      }
+    }
     
     
     if(result == "White Wins!"){img = readPNG("white_wins.png")}
@@ -58,15 +69,25 @@ first_choose = function(){
 }
 
 
+third_choose = function(){
+  repeat{
+    options(locatorBell = FALSE)
+    l = locator(1)
+    x = l$x
+    y = l$y
+    if(x>40 & x<61 & y>23 & y<31){return(5)}
+    if(x>39 & x<61 & y>8 & y<16){return(6)}
+  }
+}
+
 second_choose = function(){
   repeat{
     options(locatorBell = FALSE)
     l = locator(1)
     x = l$x
     y = l$y
-    if(x>40 & x<61 & y>23 & y<31){return(3)}
-    if(x>39 & x<61 & y>8 & y<16){return(4)}
+    if(x>42 & x<58 & y>23 & y<31){return(3)}
+    if(x>40 & x<60 & y>8 & y<16){return(4)}
   }
 }
-
 
