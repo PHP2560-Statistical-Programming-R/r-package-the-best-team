@@ -114,15 +114,13 @@ judge = function(x, num, set1, set2 = NULL, n = NULL){
   line = list(line1, line2, line3, line4)
   
   #check if there are five continuous points in the set
-  random = sample(c(1:4))
-  j = 1
-  for(i in random){
+
+  for(i in 1:4){
     judge = sum(is.element(line[[i]], set1))
       temp = check_blank(num, i, x, set2, set1, n)
       if(judge == num & is.list(temp))
         return(temp)
-    j = j+1
-    if(j == 4)
+    if(i==4)
       return(0)
   }
 }
@@ -163,10 +161,10 @@ check_blank = function(num_point, index, point, location, location2, n){
   
   left = list(as.double(unlist(left)))
   right = list(as.double(unlist(right)))
-  if(!is.element(left, location) & !is.element(left, location2) & within_boundary(left, n))
-    return(left)
-  if(!is.element(right, location) & !is.element(right, location2) & within_boundary(right, n))
-    return(right)
+  if_left = sum(is.element(left, location),!within_boundary(left, n),is.element(left, location2))
+  if_right = sum(is.element(right, location),!within_boundary(right, n), is.element(right,location2))
+  if(if_left == 0){return(left)}
+  if(if_right == 0){return(right)}
   return(0)
 }
 

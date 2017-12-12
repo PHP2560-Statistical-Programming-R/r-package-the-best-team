@@ -1,4 +1,4 @@
-gomoku_computer <- function(n = 19, choose = 1) {
+gomoku_easy <- function(n = 19, choose = 1) {
   
   
   if (!interactive()) return() #check if R is running interactively; if not, quit the game
@@ -56,8 +56,7 @@ gomoku_computer <- function(n = 19, choose = 1) {
       #black as solid circle, while as filled circle
       
       #check if computer wins
-
-      
+      computer[[i]] = c(l$x, l$y)#update the black chessmen set
       if(if_win(computer)){
         return("You Lose!")
       }

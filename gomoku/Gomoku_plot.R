@@ -49,7 +49,7 @@ stage1 = function(){
   taiji = readPNG("taiji.png")
   windowsFonts(JP1 = windowsFont("Pristina"))
   
-  bg = readJPEG("gomoku/bg.jpg")
+  bg = readJPEG("bg.jpg")
   colfunc <- colorRampPalette(c("white","goldenrod3", "white","goldenrod3","white"))
   colfunc1 = colorRampPalette(c("black","gray90"))
   n = 100
@@ -58,7 +58,7 @@ stage1 = function(){
   par(mar = rep(0, 4)) #No blank space for the main plot and the margin of plot
   plot(1:n, type = "n", xlim = c(1, n), axes = FALSE, xlab = "",
        ylab = "", bty = "o", lab = c(n, n, 1))
-  bg = readJPEG("gomoku/wood.jpg")
+  bg = readJPEG("wood.jpg")
   rasterImage(bg,0,0,1+n,1+n)
   text(x = seq(25,75, length.out = 10), y=rep(8*n/9,10), col = colfunc(10),
        cex = 3.5, label = unlist(strsplit("DIFFICULTY", NULL)), family = "JP1", lwd = 2.5)
