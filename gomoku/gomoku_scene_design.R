@@ -1,7 +1,4 @@
-library(ggplot2)
-library(Cairo)
-library(ggmap)
-library(grid)
+#Make taiji.png
 #x-axis, y-axis of the big circle(no fill)
 bigcirclex<-seq(from=-1000,to=1000,length=10000)
 bigcirclex<-c(bigcirclex,rev(bigcirclex))

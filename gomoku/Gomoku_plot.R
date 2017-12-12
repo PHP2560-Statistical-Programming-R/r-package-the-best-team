@@ -1,4 +1,4 @@
-library(stringr)
+
 stage0 = function(){
   dev.new()
   n = 100
@@ -18,6 +18,7 @@ stage0 = function(){
     text(x = 50, y = 28, col = "black", label = "BATTLE", family = "JP1", cex =2.5, lwd = 2.5)
     text(x = 50, y = 13, col = "white", family = "JP1", cex = 2.5, label = "COMPUTER", lwd = 2.5)
     rasterImage(taiji,30, 35, 70, 75)
+    
 
 }
 

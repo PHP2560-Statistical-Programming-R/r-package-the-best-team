@@ -1,7 +1,3 @@
-library(scales)
-library(png)
-library(jpeg)
-
 
 gomoku = function(n = 19)
 {
