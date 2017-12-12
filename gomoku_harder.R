@@ -38,9 +38,7 @@ check_blank = function(num_point, index, point, player, computer, n){
 #Get the avalible spot; if not available , return 0
 get_function = function(num, player, computer, n = NULL){
   get_num = lapply(player, judge, num, player, computer, n)
-
   temp = sapply(get_num, length)
-
   two_ava = which(temp == 3)
   one_ava = which(temp == 2)
   if(length(two_ava) > 0){
@@ -55,7 +53,6 @@ get_function = function(num, player, computer, n = NULL){
     get_list = get_num[[one_ava[get_one]]]
     final = get_list[[1]]
     return(final)
-    
   }
   else {return (0)}
 }   
@@ -179,15 +176,28 @@ judge = function(x, num, player, computer, n = NULL){
   line = list(line1, line2, line3, line4)
   
   #check if there are five continuous points in the set
-  random = sample(c(1:4))
-  j = 1
-  for(i in random){
+  get_num = list()
+
+  for(i in 1:4){
     if_line = sum(is.element(line[[i]], player))
-    temp = check_blank(num, i, x, player, computer, n)
-    if(if_line == num & is.list(temp))
-      return(temp)
-    j = j+1
-    if(j == 4)
-      return(0)
+    if(if_line == num)
+    get_num[[i]] = check_blank(num, i, x, player, computer, n)
+    else {get_num[[i]] = 0}
   }
+  
+  temp = sapply(get_num, length)
+  two_ava = which(temp == 3)
+  one_ava = which(temp == 2)
+  
+  if(length(two_ava) > 0){
+    get_one = sample(1:length(two_ava),1)
+    get_list = get_num[[two_ava[get_one]]]
+    return(get_list)
+  }
+  if(length(one_ava) > 0){
+    get_one = sample(1:length(one_ava),1)
+    get_list = get_num[[one_ava[get_one]]]
+    return(get_list)
+  }
+  return(0)
 }

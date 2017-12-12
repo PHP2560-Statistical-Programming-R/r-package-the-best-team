@@ -1,4 +1,4 @@
-gomoku_computer <- function(n = 19, choose) {
+gomoku_computer <- function(n = 19, choose = 1) {
   
   
   if (!interactive()) return() #check if R is running interactively; if not, quit the game
