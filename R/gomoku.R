@@ -1,4 +1,8 @@
-#'Gomoku function.
+#' Gomoku
+#' 
+#' @param Environment variable
+#' @return Initialized environment variables
+#' @export   
 gomoku = function(n = 19)
 {
   first_choose = function(){
@@ -383,7 +387,7 @@ gomoku = function(n = 19)
     n = 100
     x=c(1:n)
     y=c(1:n)
-    taiji = readPNG(system.file("taiji.png"))
+    taiji = readPNG("taiji.png")
     windowsFonts(JP1 = windowsFont("Pristina"))
     bg = readJPEG("bg.jpg")
     colfunc <- colorRampPalette(c("white","goldenrod3", "white","goldenrod3","white"))
