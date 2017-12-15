@@ -1,6 +1,6 @@
 
 stage0 = function(){
-  dev.new()
+
   n = 100
   x=c(1:n)
   y=c(1:n)

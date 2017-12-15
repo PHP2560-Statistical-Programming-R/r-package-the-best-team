@@ -7,5 +7,3 @@ source("gomoku_main_function.R")
 source("gomoku_plot.R")
 source("gomoku_harder.R")
 source("gomoku_hard.R")
-
-

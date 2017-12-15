@@ -1,6 +1,7 @@
 
 gomoku = function(n = 19)
 {
+  dev.new()
   click = 0
   result = ""
   
@@ -44,11 +45,10 @@ gomoku = function(n = 19)
     l=locator(1)
     x = l$x
     y = l$y
-    if(x>40 & x<60 & y>8 & y<16){return("Game Closed")}
-    if(x>32 & x<69 & y>23 & y<31){
+    if(x>40 & x<60 & y>8 & y<16){
       dev.off()
-      gomoku(n)
-    }
+      return("Game Closed")}
+    if(x>32 & x<69 & y>23 & y<31){gomoku(n)}
   }
 }
   
