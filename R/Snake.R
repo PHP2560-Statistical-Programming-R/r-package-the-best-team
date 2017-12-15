@@ -30,10 +30,9 @@ index<-function(col) which(e$m==col)  ## Get the index value of the matrix
 stage1<-function( ){  ## Being in the game
   e$stage<-1
   
-  #' R Snake
-  #' 
-  #' @param Matrix
-  #' @return furit
+  taiji = readPNG("taiji.png")
+  windowsFonts(JP1 = windowsFont("Pristina"))
+
   furit<-function( ){ ## Randomized fruit position
     if(length(index(e$col_furit))<=0){ ## Nonexistent position
       idx<-sample(index(e$col_path),1)
@@ -101,7 +100,7 @@ stage1<-function( ){  ## Being in the game
   drawTable<-function( ){ ## The canvas background
     plot(0,0,xlim=c(0,1),ylim=c(0,1),type='n',xaxs="i", yaxs="i")
     rect(-3, -3, 3, 3, col="cornsilk") ## Background color
-    
+
   }
   
 
@@ -125,19 +124,25 @@ stage1<-function( ){  ## Being in the game
 
 stage0<-function( ){ ## Startup screen
   e$stage<-0
+
   plot(0,0,xlim=c(0,1),ylim=c(0,1),type='n',xaxs="i", yaxs="i")
-  text(0.5,0.7,label="Snake Game",cex=5)
-  text(0.5,0.4,label="Any keyboard to start",cex=2,col=4)
-  text(0.5,0.3,label="Up,Down,Left,Rigth to control direction",cex=2,col=2)
+  
+  bg = readJPEG("BGB1.jpg")
+  rasterImage(bg,0,0,1,1)
+  text(0.5,0.7,label="Snake Game",cex=5,col="yellow")
+  text(0.5,0.4,label="Any keyboard to start",cex=2,col="pink")
+  text(0.5,0.3,label="←,↑,→,↓ to control direction",cex=2,col="pink")
 }
 
 
 stage2<-function( ){  ## Get result
   e$stage<-2
   plot(0,0,xlim=c(0,1),ylim=c(0,1),type='n',xaxs="i", yaxs="i")
-  text(0.5,0.7,label="Game Over",cex=5)
-  text(0.5,0.4,label="Space to restart, q to quit.",cex=2,col=4)
-  text(0.5,0.3,label=paste("Congratulations! You have eat",nrow(e$tail),"fruits!"),cex=2,col=2)
+  bgg = readJPEG("grass1.jpg")
+  rasterImage(bgg,0,0,1,1)
+  text(0.5,0.7,label="Congratulations!",cex=4,col="pink")
+  text(0.5,0.6,label=paste("You have eat",nrow(e$tail),"fruits!"),cex=3,col="pink")
+  text(0.5,0.4,label="'Space'' to restart, 'q' to quit.",cex=2,col="yellow")
 }
 
 
@@ -181,6 +186,7 @@ keydown<-function(K){ ## Keyboards events
 #' @return Snake moving
 #' @export
 Snake<-function( ){
+  
   
     if (.Platform$OS.type == "windows") x11() 
     else x11(type = "Xlib")
