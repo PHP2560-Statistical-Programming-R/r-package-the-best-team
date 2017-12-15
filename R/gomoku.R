@@ -6,9 +6,6 @@
 gomoku = function(n = 19)
 {
   
-  if (.Platform$OS.type == "windows") x11() 
-  else x11(type = "Xlib")
-  
   
   install_packages = function(names)
   {
