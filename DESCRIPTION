@@ -12,7 +12,6 @@ License: MIT
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
-=======
 Title: R games combo
 Version: 0.1.0
 Author: Wei Wang, Yimo Zhang, Bowei Wei
@@ -31,4 +30,4 @@ Imports:
     scales,
     png,
     jpeg
->>>>>>> e44e64a41e50bccb40fd101ab5d50bd115ed6b79
+
