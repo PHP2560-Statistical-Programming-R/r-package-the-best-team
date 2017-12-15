@@ -2,16 +2,39 @@
 % Please edit documentation in R/gomoku.R
 \name{gomoku}
 \alias{gomoku}
-\title{Gomoku}
+\title{A classic chessborad game. Player who has five stones in a row wins.}
 \usage{
 gomoku(n = 19)
 }
 \arguments{
-\item{Environment}{variable}
+\item{n}{numbers of rows and columns in the chessboard. The default value
+is 19, which is the standard size of a gomoku chessboard.}
 }
 \value{
-Initialized environment variables
+If you keep playing the game, nothing will be returned; If you close
+the game in a normal way (click quit to stop), a character string "Game Closed" will be returned.
 }
 \description{
-Gomoku
+Play with your friend or play with computer.
+Players choose a position to locate their stones alternatively, with 
+black going first.
+Player who first has five continuous stones in a row (horizontally, 
+vertically or diagonally).
+}
+\note{
+(1)Please do not roll the mouse scroll after the graphics device pops out.
+      (2)Please close the game in a normal way instead of closing the graphics
+device directly.
+      (3)The value of n should be larger than 5 so the board can accomadate at
+      least five stones.
+      (4)The value of n should be an odd number.
+}
+\references{
+/url{https://github.com/yihui/fun/blob/master/R/gomoku.R}, where
+the basic idea of this function came from.
+/url{http://www.sohu.com/a/156507478_466874}, where the idea of ploting taiji.png
+is borrowd.
+}
+\author{
+Yimo Zhang
 }

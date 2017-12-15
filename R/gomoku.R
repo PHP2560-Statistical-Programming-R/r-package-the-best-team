@@ -28,6 +28,8 @@
 #' the game in a normal way (click quit to stop), a character string "Game Closed" will be returned.
 #' @export   
 #' @example gomoku(n = 21)
+
+
 gomoku = function(n = 19)
 {
   if (!interactive()) return() #check if R is running interactively; if not, quit the game
