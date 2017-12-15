@@ -383,7 +383,7 @@ gomoku = function(n = 19)
     n = 100
     x=c(1:n)
     y=c(1:n)
-    taiji = readPNG("taiji.png")
+    taiji = readPNG(system.file("taiji.png"))
     windowsFonts(JP1 = windowsFont("Pristina"))
     bg = readJPEG("bg.jpg")
     colfunc <- colorRampPalette(c("white","goldenrod3", "white","goldenrod3","white"))
@@ -397,8 +397,6 @@ gomoku = function(n = 19)
     text(x = 50, y = 28, col = "black", label = "BATTLE", family = "JP1", cex =2.5, lwd = 2.5)
     text(x = 50, y = 13, col = "white", family = "JP1", cex = 2.5, label = "COMPUTER", lwd = 2.5)
     rasterImage(taiji,30, 35, 70, 75)
-    
-    
   }
   
   
