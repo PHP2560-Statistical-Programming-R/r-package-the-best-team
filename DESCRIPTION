@@ -1,23 +1,12 @@
 Package: LittleGames
 Type: Package
-<<<<<<< HEAD
-Title: Little Games in R
-Version: 0.0.0.666
-Author: Wei Wang, Yimo Zhang, Bowei Wei
-Maintainer: Wei Wang, Yimo Zhang, Bowei Wei <wayy@brown.edu>
-Description: This package is created for entertainment in R.
-    Use four spaces when indenting paragraphs within the Description.
 Depends: R (>= 3.3.3)
-License: MIT
-Encoding: UTF-8
-LazyData: true
-RoxygenNote: 6.0.1
 Title: R games combo
 Version: 0.1.0
 Author: Wei Wang, Yimo Zhang, Bowei Wei
 Maintainer: The package maintainer <wbwlazycat@126.com>
 Description: Four tiny games built in R envorinment.
-License: What license is it under?
+License: MIT
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
