@@ -1,14 +1,9 @@
-#######################################
-# Snake function
-#######################################  
-
 #' R Snake
 #' 
 #' @param Keyboards events
 #' @return Snake moving
 #' @export
 Snake<-function( ){
-  
   
   install_packages <- function(names)
   {
