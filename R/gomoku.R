@@ -1,17 +1,40 @@
 #' A classic chessborad game. Player who has five stones in a row wins.
 #' 
-#' You either play with your friend or play with the computer.
-#' Black stone goes first
-#' @param n numbers of rows and columns
-#' @return Initialized environment variables
+#' Play with your friend or play with computer.
+#' Players choose a position to locate their stones alternatively, with 
+#' black going first.
+#' Player who first has five continuous stones in a row (horizontally, 
+#' vertically or diagonally).
+#' 
+#' @param n numbers of rows and columns in the chessboard. The default value
+#' is 19, which is the standard size of a gomoku chessboard.
+#' 
+#' @note (1)Please do not roll the mouse scroll after the graphics device pops out.
+#'       (2)Please close the game in a normal way instead of closing the graphics
+#' device directly.
+#'       (3)The value of n should be larger than 5 so the board can accomadate at
+#'       least five stones.
+#'       (4)The value of n should be an odd number.
+#' 
+#' @author Yimo Zhang
+#' 
+#' @references /url{https://github.com/yihui/fun/blob/master/R/gomoku.R}, where
+#' the basic idea of this function came from.
+#' /url{http://www.sohu.com/a/156507478_466874}, where the idea of ploting taiji.png
+#' is borrowd.
+#' 
+#' 
+#' @return If you keep playing the game, nothing will be returned; If you close
+#' the game in a normal way (click quit to stop), a character string "Game Closed" will be returned.
 #' @export   
+#' @example gomoku(n = 21)
 gomoku = function(n = 19)
 {
   if (!interactive()) return() #check if R is running interactively; if not, quit the game
   if(n < 5) stop("Hmm, n is too small for the game to play!")
   if(n %% 2 < 1) stop("Sorry, n must be a odd number!")
   
-  dev.new()
+  x11()
   
   
   install_packages = function(names)
