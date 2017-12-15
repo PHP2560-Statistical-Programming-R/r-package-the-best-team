@@ -1,6 +1,8 @@
-#' Gomoku
+#' A classic chessborad game. Player who has five stones in a row wins.
 #' 
-#' @param Environment variable
+#' You either play with your friend or play with the computer.
+#' Black stone goes first
+#' @param n numbers of rows and columns
 #' @return Initialized environment variables
 #' @export   
 gomoku = function(n = 19)
