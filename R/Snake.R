@@ -2,6 +2,20 @@
 #' 
 #' @param Environment variable
 #' @return Initialized environment variables
+#' 
+
+install_packages <- function(names)
+{
+  for(name in names)
+  {
+    if (!(name %in% installed.packages()))
+      install.packages(name, repos="http://cran.us.r-project.org")
+    
+    library(name, character.only=TRUE)
+  }
+}
+
+install_packages(c("ggplot2","Cairo","ggmap","grid","scales","png","jpeg")) 
  
 init<-function( ){ ## Initialize the environment variable
   e<<-new.env()
@@ -29,9 +43,7 @@ index<-function(col) which(e$m==col)  ## Get the index value of the matrix
 
 stage1<-function( ){  ## Being in the game
   e$stage<-1
-  
-  taiji = readPNG("taiji.png")
-  windowsFonts(JP1 = windowsFont("Pristina"))
+
 
   furit<-function( ){ ## Randomized fruit position
     if(length(index(e$col_furit))<=0){ ## Nonexistent position
@@ -186,7 +198,7 @@ keydown<-function(K){ ## Keyboards events
 #' @return Snake moving
 #' @export
 Snake<-function( ){
-  
+
   
     if (.Platform$OS.type == "windows") x11() 
     else x11(type = "Xlib")
