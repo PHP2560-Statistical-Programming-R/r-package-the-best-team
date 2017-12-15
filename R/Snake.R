@@ -1,9 +1,30 @@
+#######################################
+# Snake function
+#######################################  
+
 #' R Snake
 #' 
-#' @param Environment variable
-#' @return Initialized environment variables
-#' 
- 
+#' @param Keyboards events
+#' @return Snake moving
+#' @export
+Snake<-function( ){
+  
+  
+  install_packages <- function(names)
+  {
+    for(name in names)
+    {
+      if (!(name %in% installed.packages()))
+        install.packages(name, repos="http://cran.us.r-project.org")
+      
+      library(name, character.only=TRUE)
+    }
+  }
+  
+  install_packages(c("ggplot2","Cairo","ggmap","grid","scales","png","jpeg")) 
+  
+  if (.Platform$OS.type == "windows") x11() 
+  else x11(type = "Xlib")
 init<-function( ){ ## Initialize the environment variable
   e<<-new.env()
   e$stage<-0 ## Scene
@@ -174,33 +195,7 @@ keydown<-function(K){ ## Keyboards events
   return(NULL)
 }
 
-#######################################
-# Snake function
-#######################################  
 
-#' R Snake
-#' 
-#' @param Keyboards events
-#' @return Snake moving
-#' @export
-Snake<-function( ){
-
-  
-  install_packages <- function(names)
-  {
-    for(name in names)
-    {
-      if (!(name %in% installed.packages()))
-        install.packages(name, repos="http://cran.us.r-project.org")
-      
-      library(name, character.only=TRUE)
-    }
-  }
-  
-  install_packages(c("ggplot2","Cairo","ggmap","grid","scales","png","jpeg")) 
-  
-    if (.Platform$OS.type == "windows") x11() 
-    else x11(type = "Xlib")
   
   par(mai=rep(0,4),oma=rep(0,4)) ## Set the global canvas without edge
   e<<-new.env() ## Encapsulate variables
