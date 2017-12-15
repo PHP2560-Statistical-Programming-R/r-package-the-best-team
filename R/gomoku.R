@@ -5,6 +5,11 @@
 #' @export   
 gomoku = function(n = 19)
 {
+  if (!interactive()) return() #check if R is running interactively; if not, quit the game
+  if(n < 5) stop("Hmm, n is too small for the game to play!")
+  if(n %% 2 < 1) stop("Sorry, n must be a odd number!")
+  
+  dev.new()
   
   
   install_packages = function(names)
@@ -403,14 +408,13 @@ gomoku = function(n = 19)
     n = 100
     x=c(1:n)
     y=c(1:n)
-    taiji = readPNG("taiji.png")
+    taiji = readPNG(system.file("img","taiji.png",package = "LittleGames"))
     windowsFonts(JP1 = windowsFont("Pristina"))
-    bg = readJPEG("bg.jpg")
+    bg = readJPEG(system.file("img","wood.jpg",package = "LittleGames"))
     colfunc <- colorRampPalette(c("white","goldenrod3", "white","goldenrod3","white"))
     par(mar = rep(0, 4)) #No blank space for the main plot and the margin of plot
     plot(1:n, type = "n", xlim = c(1, n), axes = FALSE, xlab = "",
          ylab = "", bty = "o", lab = c(n, n, 1))
-    bg = readJPEG("wood.jpg")
     rasterImage(bg,0,0,1+n,1+n)
     text(x = seq(32,68, length.out = 6), y=rep(8*n/9,6), col = colfunc(6),
          cex = 3.5, label = unlist(strsplit("GOMOKU", NULL)), family = "JP1", lwd = 2.5)
@@ -421,10 +425,9 @@ gomoku = function(n = 19)
   
   
   stage1 = function(){
-    taiji = readPNG("taiji.png")
+    taiji = readPNG(system.file("img","taiji.png",package = "LittleGames"))
     windowsFonts(JP1 = windowsFont("Pristina"))
-    
-    bg = readJPEG("bg.jpg")
+    bg = readJPEG(system.file("img","wood.jpg",package = "LittleGames"))
     colfunc <- colorRampPalette(c("white","goldenrod3", "white","goldenrod3","white"))
     colfunc1 = colorRampPalette(c("black","gray90"))
     n = 100
@@ -433,7 +436,6 @@ gomoku = function(n = 19)
     par(mar = rep(0, 4)) #No blank space for the main plot and the margin of plot
     plot(1:n, type = "n", xlim = c(1, n), axes = FALSE, xlab = "",
          ylab = "", bty = "o", lab = c(n, n, 1))
-    bg = readJPEG("wood.jpg")
     rasterImage(bg,0,0,1+n,1+n)
     text(x = seq(25,75, length.out = 10), y=rep(8*n/9,10), col = colfunc(10),
          cex = 3.5, label = unlist(strsplit("DIFFICULTY", NULL)), family = "JP1", lwd = 2.5)
@@ -443,10 +445,9 @@ gomoku = function(n = 19)
   }
   
   stage2 = function(){
-    taiji = readPNG("taiji.png")
+    taiji = readPNG(system.file("img","taiji.png",package = "LittleGames"))
     windowsFonts(JP1 = windowsFont("Pristina"))
-    
-    bg = readJPEG("bg.jpg")
+    bg = readJPEG(system.file("img","wood.jpg",package = "LittleGames"))
     colfunc <- colorRampPalette(c("white","goldenrod3", "white","goldenrod3","white"))
     colfunc1 = colorRampPalette(c("black","gray90"))
     n = 100
@@ -455,7 +456,6 @@ gomoku = function(n = 19)
     par(mar = rep(0, 4)) #No blank space for the main plot and the margin of plot
     plot(1:n, type = "n", xlim = c(1, n), axes = FALSE, xlab = "",
          ylab = "", bty = "o", lab = c(n, n, 1))
-    bg = readJPEG("wood.jpg")
     rasterImage(bg,0,0,1+n,1+n)
     text(x = seq(25,75, length.out = 8), y=rep(8*n/9,8), col = colfunc(8),
          cex = 3.5, label = unlist(strsplit("COMPUTER", NULL)), family = "JP1", lwd = 2.5)
@@ -469,7 +469,7 @@ gomoku = function(n = 19)
     colfunc <- colorRampPalette(c("white","goldenrod3", "white","goldenrod3","white"))
     colfunc1 = colorRampPalette(c("black","gray90"))
     windowsFonts(JP1 = windowsFont("Pristina"))
-    bg = readJPEG("wood.jpg")
+    bg = readJPEG(system.file("img","wood.jpg",package = "LittleGames"))
     n = 100
     x=c(1:n)
     y=c(1:n)
@@ -502,13 +502,8 @@ gomoku = function(n = 19)
 ############################Begin functions###########################################
   gomoku_self <- function(n = 19) {
     
-    
-    if (!interactive()) return() #check if R is running interactively; if not, quit the game
-    if(n < 5) stop("Hmm, n is too small for the game to play!")
-    if(n %% 2 < 1) stop("Sorry, n must be a odd number!")
-    
     #Setting of the game
-    img<-readJPEG("wood.jpg")
+    img = readJPEG(system.file("img","wood.jpg",package = "LittleGames"))
     par(mar = rep(0, 4)) #No blank space for the main plot and the margin of plot
     plot(1:n, type = "n", xlim = c(1, n), axes = FALSE, xlab = "",
          ylab = "", bty = "o", lab = c(n, n, 1))#add points to the plot where the lines should be located
@@ -571,7 +566,7 @@ gomoku = function(n = 19)
     if(n < 5) stop("Hmm, n is too small for the game to play!")
     if(n %% 2 < 1) stop("Sorry, n must be a odd number!")
     #Setting of the game
-    img<-readJPEG("wood.jpg")
+    img = readJPEG(system.file("img","wood.jpg",package = "LittleGames"))
     par(mar = rep(0, 4)) #No blank space for the main plot and the margin of plot
     plot(1:n, type = "n", xlim = c(1, n), axes = FALSE, xlab = "",
          ylab = "", bty = "o", lab = c(n, n, 1))#add points to the plot where the lines should be located
@@ -675,7 +670,7 @@ gomoku = function(n = 19)
     if(n < 5) stop("Hmm, n is too small for the game to play!")
     if(n %% 2 < 1) stop("Sorry, n must be a odd number!")
     #Setting of the game
-    img<-readJPEG("wood.jpg")
+    img = readJPEG(system.file("img","wood.jpg",package = "LittleGames"))
     par(mar = rep(0, 4)) #No blank space for the main plot and the margin of plot
     plot(1:n, type = "n", xlim = c(1, n), axes = FALSE, xlab = "",
          ylab = "", bty = "o", lab = c(n, n, 1))#add points to the plot where the lines should be located
@@ -772,8 +767,7 @@ gomoku = function(n = 19)
     }
   }
 ###############################Begin functions over#####################################3  
-  
-  dev.new()
+
   click = 0
   result = ""
   
@@ -806,10 +800,10 @@ gomoku = function(n = 19)
   }
   
   
-  if(result == "White Wins!"){img = readPNG("white_wins.png")}
-  if(result == "Black Wins!"){img = readPNG("black_wins.png")}
-  if(result == "You Win!"){img = readPNG("happy_face.png")}
-  if(result == "You Lose!"){img = readPNG("sad_face.png")}
+  if(result == "White Wins!"){img = readPNG(system.file("img","white_wins.png", package="LittleGames"))}
+  if(result == "Black Wins!"){img = readPNG(system.file("img","black_wins.png",package = "LittleGames"))}
+  if(result == "You Win!"){img = readPNG(system.file("img","happy_face.png", package = "LittleGames"))}
+  if(result == "You Lose!"){img = readPNG(system.file("img","sad_face.png",package = "LittleGames"))}
   
   gameover(result = result, img = img)
   repeat{
@@ -820,7 +814,9 @@ gomoku = function(n = 19)
     if(x>40 & x<60 & y>8 & y<16){
       dev.off()
       return("Game Closed")}
-    if(x>32 & x<69 & y>23 & y<31){gomoku(n)}
+    if(x>32 & x<69 & y>23 & y<31){
+      dev.off()
+      gomoku(n)}
   }
 }
 
