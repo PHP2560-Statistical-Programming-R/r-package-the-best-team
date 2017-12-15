@@ -4,31 +4,26 @@
 #' @return Initialized environment variables
 #' 
 
-install_packages <- function(names)
-{
-  for(name in names)
-  {
-    if (!(name %in% installed.packages()))
-      install.packages(name, repos="http://cran.us.r-project.org")
-    
-    library(name, character.only=TRUE)
-  }
-}
-
-install_packages(c("ggplot2","dplyr","rpart","caret","e1071")) 
-
-
-library("ggplot2")
-library("dplyr")
-library("rpart")
-library("caret")
-library("e1071")
 
 #' R Flags
 #' @param Number of points
 #' @return Japanese flag
 #' @export
 Japan <- function(a = 20000){  
+  
+  
+  install_packages <- function(names)
+  {
+    for(name in names)
+    {
+      if (!(name %in% installed.packages()))
+        install.packages(name, repos="http://cran.us.r-project.org")
+      
+      library(name, character.only=TRUE)
+    }
+  }
+  
+  install_packages(c("ggplot2","dplyr","rpart","caret","e1071")) 
 # Let's create 50k points on a 3x2 grid
 x <- runif(a, min = 0, max = 3)
 y <- runif(a, min = 0, max = 2)
@@ -54,6 +49,19 @@ ggplot(japan_flag) +
 #' @return Sweden flag
 #' @export
 Sweden <- function(a = 20000){ 
+  
+  install_packages <- function(names)
+  {
+    for(name in names)
+    {
+      if (!(name %in% installed.packages()))
+        install.packages(name, repos="http://cran.us.r-project.org")
+      
+      library(name, character.only=TRUE)
+    }
+  }
+  
+  install_packages(c("ggplot2","dplyr","rpart","caret","e1071")) 
 # Let's create 200k points on a 16x10 grid
 x <- runif(a, min = 0, max = 16)
 y <- runif(a, min = 0, max = 10)
@@ -79,6 +87,19 @@ ggplot(flag) +
 #' @return Denmark flag
 #' @export
 Denmark <- function(a = 20000){ 
+  
+  install_packages <- function(names)
+  {
+    for(name in names)
+    {
+      if (!(name %in% installed.packages()))
+        install.packages(name, repos="http://cran.us.r-project.org")
+      
+      library(name, character.only=TRUE)
+    }
+  }
+  
+  install_packages(c("ggplot2","dplyr","rpart","caret","e1071")) 
 # Let's create 200k points on a 16x10 grid
 x <- runif(a, min = 0, max = 16)
 y <- runif(a, min = 0, max = 10)
@@ -104,6 +125,19 @@ ggplot(flag) +
 #' @return Finland flag
 #' @export
 Finland <- function(a = 20000){ 
+  
+  install_packages <- function(names)
+  {
+    for(name in names)
+    {
+      if (!(name %in% installed.packages()))
+        install.packages(name, repos="http://cran.us.r-project.org")
+      
+      library(name, character.only=TRUE)
+    }
+  }
+  
+  install_packages(c("ggplot2","dplyr","rpart","caret","e1071")) 
 # Let's create 200k points on a 16x10 grid
 x <- runif(a, min = 0, max = 16)
 y <- runif(a, min = 0, max = 10)
@@ -131,6 +165,19 @@ ggplot(flag) +
 #' @return Norway flag
 #' @export
 Norway <- function(a = 20000){
+  
+  install_packages <- function(names)
+  {
+    for(name in names)
+    {
+      if (!(name %in% installed.packages()))
+        install.packages(name, repos="http://cran.us.r-project.org")
+      
+      library(name, character.only=TRUE)
+    }
+  }
+  
+  install_packages(c("ggplot2","dplyr","rpart","caret","e1071")) 
 # Let's create 200k points on a 21x16 grid
 x <- runif(a, min = 0, max = 21)
 y <- runif(a, min = 0, max = 16)
@@ -157,6 +204,19 @@ ggplot(flag) +
 #' @return Iceland flag
 #' @export
 Iceland <- function(a = 20000){
+  
+  install_packages <- function(names)
+  {
+    for(name in names)
+    {
+      if (!(name %in% installed.packages()))
+        install.packages(name, repos="http://cran.us.r-project.org")
+      
+      library(name, character.only=TRUE)
+    }
+  }
+  
+  install_packages(c("ggplot2","dplyr","rpart","caret","e1071")) 
 # Let's create 200k points on a 21x16 grid
 x <- runif(a, min = 0, max = 21)
 y <- runif(a, min = 0, max = 16)

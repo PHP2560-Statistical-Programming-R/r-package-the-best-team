@@ -3,19 +3,6 @@
 #' @param Environment variable
 #' @return Initialized environment variables
 #' 
-
-install_packages <- function(names)
-{
-  for(name in names)
-  {
-    if (!(name %in% installed.packages()))
-      install.packages(name, repos="http://cran.us.r-project.org")
-    
-    library(name, character.only=TRUE)
-  }
-}
-
-install_packages(c("ggplot2","Cairo","ggmap","grid","scales","png","jpeg")) 
  
 init<-function( ){ ## Initialize the environment variable
   e<<-new.env()
@@ -138,8 +125,7 @@ stage0<-function( ){ ## Startup screen
   e$stage<-0
 
   plot(0,0,xlim=c(0,1),ylim=c(0,1),type='n',xaxs="i", yaxs="i")
-  
-  bg = readJPEG("BGB1.jpg")
+  bg = readJPEG(system.file("img","BGB1.jpg",package = "LittleGames"))
   rasterImage(bg,0,0,1,1)
   text(0.5,0.7,label="Snake Game",cex=5,col="yellow")
   text(0.5,0.4,label="Any keyboard to start",cex=2,col="pink")
@@ -150,7 +136,7 @@ stage0<-function( ){ ## Startup screen
 stage2<-function( ){  ## Get result
   e$stage<-2
   plot(0,0,xlim=c(0,1),ylim=c(0,1),type='n',xaxs="i", yaxs="i")
-  bgg = readJPEG("grass1.jpg")
+  bgg = readJPEG(system.file("img","grass1.jpg",package = "LittleGames"))
   rasterImage(bgg,0,0,1,1)
   text(0.5,0.7,label="Congratulations!",cex=4,col="pink")
   text(0.5,0.6,label=paste("You have eat",nrow(e$tail),"fruits!"),cex=3,col="pink")
@@ -199,6 +185,19 @@ keydown<-function(K){ ## Keyboards events
 #' @export
 Snake<-function( ){
 
+  
+  install_packages <- function(names)
+  {
+    for(name in names)
+    {
+      if (!(name %in% installed.packages()))
+        install.packages(name, repos="http://cran.us.r-project.org")
+      
+      library(name, character.only=TRUE)
+    }
+  }
+  
+  install_packages(c("ggplot2","Cairo","ggmap","grid","scales","png","jpeg")) 
   
     if (.Platform$OS.type == "windows") x11() 
     else x11(type = "Xlib")

@@ -29,23 +29,25 @@ input.data <- function()  {
 #`Function starts now
 start <- function ()  {
   inputs <- input.data()
-  mine_sweeper(inputs$w, inputs$h, inputs$m)
+  mine_sweeper(inputs$w, inputs$h, inputs$m, cheat = FALSE)
 }
 
-
-mine_sweeper <- function(width_in, height_in, mines_in) {
-  if (.Platform$OS.type == "windows") x11() else x11(type = "Xlib")
-  mine_sweeper_1(width = width_in, height = height_in, mines = mines_in, cheat = FALSE)
-}
 
 
 #' For Idiot player, you can cheat!
-mine_sweeper.cheat <- function(width_in, height_in, mines_in) {
-  mine_sweeper_1(width = width_in, height = height_in, mines = mines_in, cheat = TRUE)
+start.cheat <- function() {
+  inputs <- input.data()
+  mine_sweeper.cheat(inputs$w, inputs$h, inputs$m, cheat = TRUE)
+}
+
+#Execute funtion for cheating
+mine_sweeper.cheat <- function(width_in, height_in, mines_in, cheat) {
+  mine_sweeper(width = width_in, height = height_in, mines = mines_in, cheat = TRUE)
 }
 
 
-mine_sweeper_1 <- function(width, height, mines, cheat = FALSE) {
+mine_sweeper <- function(width, height, mines, cheat) {
+  if (.Platform$OS.type == "windows") x11() else x11(type = "Xlib")
   # Deal with some exceptions
   if (!interactive()) return()
   if (mines >= width * height - 1) {
