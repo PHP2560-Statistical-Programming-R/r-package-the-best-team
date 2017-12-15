@@ -5,6 +5,25 @@
 #' @export   
 gomoku = function(n = 19)
 {
+  
+  if (.Platform$OS.type == "windows") x11() 
+  else x11(type = "Xlib")
+  
+  
+  install_packages = function(names)
+  {
+    for(name in names)
+    {
+      if (!(name %in% installed.packages()))
+        install.packages(name, repos="http://cran.us.r-project.org")
+      
+      library(name, character.only=TRUE)
+    }
+  }
+  
+  install_packages(c("stringr","ggplot2","Cairo","ggmap","grid","scales","png","jpeg"))
+  
+  
   first_choose = function(){
     repeat{
       options(locatorBell = FALSE)
