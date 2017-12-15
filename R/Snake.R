@@ -145,7 +145,7 @@ stage0<-function( ){ ## Startup screen
   rasterImage(bg,0,0,1,1)
   text(0.5,0.7,label="Snake Game",cex=5,col="yellow")
   text(0.5,0.4,label="Any keyboard to start",cex=2,col="pink")
-  text(0.5,0.3,label="←,↑,→,↓ to control direction",cex=2,col="pink")
+  text(0.5,0.3,label="up,down,left,right to control direction",cex=2,col="pink")
 }
 
 
