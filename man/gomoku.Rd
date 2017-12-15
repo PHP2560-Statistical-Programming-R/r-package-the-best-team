@@ -2,7 +2,7 @@
 % Please edit documentation in R/gomoku.R
 \name{gomoku}
 \alias{gomoku}
-\title{A classic chessborad game. Player who has five stones in a row wins.}
+\title{A classic chessborad game.}
 \usage{
 gomoku(n = 19)
 }
@@ -16,6 +16,7 @@ the game in a normal way (click quit to stop), a character string "Game Closed" 
 }
 \description{
 Play with your friend or play with computer.
+Player who has five stones in a row wins.
 Players choose a position to locate their stones alternatively, with 
 black going first.
 Player who first has five continuous stones in a row (horizontally, 
