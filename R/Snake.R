@@ -2,7 +2,7 @@
 #' 
 #' @param Environment variable
 #' @return Initialized environment variables
-#' @export    
+ 
 init<-function( ){ ## Initialize the environment variable
   e<<-new.env()
   e$stage<-0 ## Scene
@@ -21,19 +21,12 @@ init<-function( ){ ## Initialize the environment variable
   
 }
 
-#' R Snake
-#' 
-#' @param Matrix
-#' @return Get the index value of the matrix
-#' @export    
+ 
 index<-function(col) which(e$m==col)  ## Get the index value of the matrix
 
 
 
-#' R Snake
-#' 
-#' @param Matrix
-#' @return stage1
+
 stage1<-function( ){  ## Being in the game
   e$stage<-1
   
@@ -54,10 +47,7 @@ stage1<-function( ){  ## Being in the game
     }
   }
   
-  #' R Snake
-  #' 
-  #' @param Matrix
-  #' @return Check the failure
+
   fail<-function( ){    ## Check the failure
     ## Head out of ledge
     if(length(which(e$head<1))>0 | length(which(e$head>e$width))>0){
@@ -76,10 +66,7 @@ stage1<-function( ){  ## Being in the game
     return(FALSE)
   }
   
-  #' R Snake
-  #' 
-  #' @param Direction operator
-  #' @return Snake head
+
   head<-function( ){    ## Snake head
     e$lastx<-e$head[1]
     e$lasty<-e$head[2]
@@ -92,10 +79,7 @@ stage1<-function( ){  ## Being in the game
     
   }
   
-  #' R Snake
-  #' 
-  #' @param Direction operator
-  #' @return Snake body
+
   body<-function( ){    ## Snake body
     e$m[e$lastx,e$lasty]<-0
     e$m[e$head[1],e$head[2]]<-e$col_head ## Snake
@@ -113,21 +97,14 @@ stage1<-function( ){  ## Being in the game
     print(paste("snake idx",index(e$col_head)))
     print(paste("snake axis:",e$head[1],e$head[2]))
   }
-  
-  #' R Snake
-  #' 
-  #' @param Matrix
-  #' @return The canvas background
+
   drawTable<-function( ){ ## The canvas background
     plot(0,0,xlim=c(0,1),ylim=c(0,1),type='n',xaxs="i", yaxs="i")
     rect(-3, -3, 3, 3, col="cornsilk") ## Background color
     
   }
   
-  #' R Snake
-  #' 
-  #' @param Data
-  #' @return matrix with data
+
   drawMatrix<-function( ){     ## Fill in the data according to the matrix
     idx<-which(e$m>0)
     px<- (ifelse(idx%%e$width==0,e$width,idx%%e$width)-1)/e$width+e$step/2
@@ -145,10 +122,7 @@ stage1<-function( ){  ## Being in the game
   }
 }
 
-#' R Snake
-#' 
-#' @param Data
-#' @return Startup screen
+
 stage0<-function( ){ ## Startup screen
   e$stage<-0
   plot(0,0,xlim=c(0,1),ylim=c(0,1),type='n',xaxs="i", yaxs="i")
@@ -157,10 +131,7 @@ stage0<-function( ){ ## Startup screen
   text(0.5,0.3,label="Up,Down,Left,Rigth to control direction",cex=2,col=2)
 }
 
-#' R Snake
-#' 
-#' @param Data
-#' @return Get result
+
 stage2<-function( ){  ## Get result
   e$stage<-2
   plot(0,0,xlim=c(0,1),ylim=c(0,1),type='n',xaxs="i", yaxs="i")
@@ -170,11 +141,7 @@ stage2<-function( ){  ## Get result
 }
 
 
-#' R Snake
-#' 
-#' @param Keyboards events
-#' @return Moving
-#' @export
+
 keydown<-function(K){ ## Keyboards events
   print(paste("keydown:",K,",stage:",e$stage));
   
