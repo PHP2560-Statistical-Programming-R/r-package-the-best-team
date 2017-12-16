@@ -1,8 +1,24 @@
-#' R Snake
+#' @title R Snake
+#' 
+#' 
+#' @description R snake is a classic game. 
+#' Players use Up, Down, Left, Right to move and change directions.
+#' The head of the snake should not touch its tail or the ledge. 
+#' The more fruits a snake eats, the higher a player will rank.
 #' 
 #' @param Keyboards events
-#' @return Snake moving
-#' @export
+#' @return Fruits a snake got
+#' 
+#' @note Do not press Q if you do not want to quit R.
+#'       
+#' @author Wei Wang
+#' 
+#' @references /url{http://blog.fens.me/r-game-snake/}, where
+#' the basic idea of this function came from.
+#' 
+#' 
+#' @export   
+#' @example Snake()
 Snake<-function( ){
   
   install_packages <- function(names)
