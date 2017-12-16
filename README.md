@@ -33,7 +33,7 @@ button so that we don't have to call the function over and over again.
 
 (4)Gomoku function (modified);
 
-(5)(Possible)Tag cloud function (modified);
+(5)Flags function.
 
 ## More
 
