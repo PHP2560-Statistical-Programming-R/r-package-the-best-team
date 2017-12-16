@@ -13,7 +13,6 @@ is 19, which is the standard size of a gomoku chessboard.}
 \value{
 If you keep playing the game, nothing will be returned; If you close
 the game by clicking "quit", a table containing all the results will be displayed;
-if there are no results, a character string "Game Closed, No Record" will return.
 
 If you keep playing the game, nothing will be returned; If you close
 the game in a normal way (click quit to stop), a character string "Game Closed" will be returned.

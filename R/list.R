@@ -32,14 +32,14 @@ little_game = function(name){
   
   
   #Flags
-<<<<<<< HEAD
+
   return(filter(t, tolower(Name) == name))
-=======
+
   t$Rule[5] = "R flag is a simple drawing game. Players can choose the number of points and name of a country to get a country flag."
   
   t$`Additional Notes`[5] = "The flags here are so limited, welcome to add more flags."
   
   
   return(filter(t, Name == name))
->>>>>>> 4f0f3537a9fd721ede5b4de7c1d4004dde330f30
+
   }
