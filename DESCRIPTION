@@ -19,6 +19,9 @@ Imports:
   scales,
   png,
   jpeg,
+  rpart,
+  caret,
+  e1071,
   
   
 
