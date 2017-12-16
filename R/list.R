@@ -24,7 +24,22 @@ little_game = function(name){
   
   
   #Snake
+  t$Rule[4] = "R snake is a classic game. Players use Up, Down, Left, Right to move and change directions. 
+  The head of the snake should not touch its tail or the ledge. The more fruits a snake eats, the higher a player will rank."
+  
+  t$`Additional Notes`[4] = "The code here has a lot to be improved, for more info: 
+  {http://blog.fens.me/r-game-snake/}"
+  
   
   #Flags
+<<<<<<< HEAD
   return(filter(t, tolower(Name) == name))
+=======
+  t$Rule[5] = "R flag is a simple drawing game. Players can choose the number of points and name of a country to get a country flag."
+  
+  t$`Additional Notes`[5] = "The flags here are so limited, welcome to add more flags."
+  
+  
+  return(filter(t, Name == name))
+>>>>>>> 4f0f3537a9fd721ede5b4de7c1d4004dde330f30
   }
