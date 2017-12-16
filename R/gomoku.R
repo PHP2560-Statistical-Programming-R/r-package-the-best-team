@@ -15,16 +15,14 @@
 #' device directly.
 #'       (3)The value of n should be larger than 5 so the board can accomadate at
 #'       least five stones.
-<<<<<<< HEAD
 #'       (4)The value of code{n} should be an odd number.
 #'       
 #' @return If you keep playing the game, nothing will be returned; If you close
 #' the game by clicking "quit", a table containing all the results will be displayed;
 #' if there are no results, a character string "Game Closed, No Record" will return.       
-=======
+
 #'       (4)The value of n should be an odd number.
->>>>>>> 347a4292c932e9b0d80c5d6c39b9d9eb6cb42888
-#' 
+
 #' @author Yimo Zhang
 #' 
 #' @references /url{https://github.com/yihui/fun/blob/master/R/gomoku.R}, where
