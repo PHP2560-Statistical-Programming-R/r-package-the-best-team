@@ -27,13 +27,13 @@ button so that we don't have to call the function over and over again.
 
 (1)A function that returns a table that contains the names of the games and their following profile;
 
-(2)Mine sweeper function (modified); You can just type in start() to start the game. left click is to identify the mines. Right click is for the flags. You will have the options for restart if the game ends. I won't tell you there's bonus scene that you can cheat in the program! hahaha glhf!
+(2)Mine sweeper function (modified); You can just type in minesweeper() to start the game. left click is to identify the mines. Right click is for the flags. You will have the options for restart if the game ends. I won't tell you there's bonus scene that you can cheat in the program! hahaha glhf!
 
 (3)Snake function (modified);
 
 (4)Gomoku function (modified);
 
-(5)Flags function.
+(5)(Possible)Tag cloud function (modified);
 
 ## More
 

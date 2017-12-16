@@ -2,7 +2,10 @@
 % Please edit documentation in R/mine_sweeper_pkg.R
 \name{minesweeper}
 \alias{minesweeper}
-\title{Mine Sweeper}
+\title{Play the Mine Sweeper game in R
+Just type in minesweeper() and the game will start
+The controls should be familiar to you: Click the left mouse button to dig in
+an area, and right button to mark or unmark the area with flags.}
 \usage{
 minesweeper()
 }
