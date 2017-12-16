@@ -15,15 +15,12 @@
 #' device directly.
 #'       (3)The value of n should be larger than 5 so the board can accomadate at
 #'       least five stones.
-<<<<<<< HEAD
+
 #'       (4)The value of code{n} should be an odd number.
 #'       
 #' @return If you keep playing the game, nothing will be returned; If you close
 #' the game by clicking "quit", a table containing all the results will be displayed;
 #' if there are no results, a character string "Game Closed, No Record" will return.       
-=======
-#'       (4)The value of n should be an odd number.
->>>>>>> 347a4292c932e9b0d80c5d6c39b9d9eb6cb42888
 #' 
 #' @author Yimo Zhang
 #' 
@@ -46,11 +43,11 @@ gomoku = function(n = 19)
   if(n < 5) stop("Hmm, n is too small for the game to play!")
   if(n %% 2 < 1) stop("Sorry, n must be a odd number!")
   
-<<<<<<< HEAD
+
   result_table = tibble("Date"= as.character(Sys.Date()), "Time" = as.character(format(Sys.time(), "%X")), "Game" = "None", "Result" = "None")
 
   #Choose to play with your friend or computer
-=======
+
   x11()
   
   
@@ -68,7 +65,7 @@ gomoku = function(n = 19)
   install_packages(c("stringr","ggplot2","Cairo","ggmap","grid","scales","png","jpeg"))
   
   
->>>>>>> 347a4292c932e9b0d80c5d6c39b9d9eb6cb42888
+
   first_choose = function(){
     repeat{
       options(locatorBell = FALSE)
@@ -877,13 +874,9 @@ gomoku = function(n = 19)
     l=locator(1)
     x = l$x
     y = l$y
-<<<<<<< HEAD
+
     if(x>40 & x<60 & y>8 & y<16){return(result_table)}
-=======
-    if(x>40 & x<60 & y>8 & y<16){
-      dev.off()
-      return("Game Closed")}
->>>>>>> 347a4292c932e9b0d80c5d6c39b9d9eb6cb42888
+
     if(x>32 & x<69 & y>23 & y<31){
       dev.off()
       return(gomoku_begin(n, result_table))}

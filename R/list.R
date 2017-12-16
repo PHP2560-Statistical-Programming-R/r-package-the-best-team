@@ -21,16 +21,10 @@ little_game = function(name){
   please see website {http://gomokuworld.com/articles/16_useful_tips_to_become_a_better_gomoku_player}."
   
   #mine sweeper
-  t$Rule[3] = "Play the Mine Sweeper game in R Just type in minesweeper() and the game will start The 
-  controls should be familiar to you: Click the left mouse button to dig in an area, and right button 
-  to mark or unmark the area with flags."
-  
-  t$`Additional Notes`[3] = "Thanks for the original coder Yihui Xie, for more info: 
-  {https://yihui.name/en/2011/08/the-fun-package-use-r-for-fun/}"
   
   
   #Snake
   
   #Flags
-  return(filter(t, Name == name))
+  return(filter(t, tolower(Name) == name))
   }
