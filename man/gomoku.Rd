@@ -24,7 +24,7 @@ vertically or diagonally) wins the game.
 \note{
 (1)Do not roll the mouse scroll after the graphic device pops out, or the
 plots will be messed up.
-      (2)Do not close the graphic device during the game. Close it only after
+      (2)Better not close the graphic device during the game. Close it only after
       clicking the quit option.
       (3)The value of n should be larger than 5 so the board can accomadate at
       least five stones.

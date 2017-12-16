@@ -18,7 +18,8 @@
 #'       (4)The value of code{n} should be an odd number.
 #'       
 #' @return If you keep playing the game, nothing will be returned; If you close
-#' the game by clicking "quit", a character string "Game Closed" will return.       
+#' the game by clicking "quit", a table containing all the results will be displayed;
+#' if there are no results, a character string "Game Closed, No Record" will return.       
 #' 
 #' @author Yimo Zhang
 #' 
@@ -35,26 +36,13 @@
 
 gomoku = function(n = 19)
 {
+  
   if (!interactive()) return() #check if R is running interactively; if not, quit the game
   if(n < 5) stop("Hmm, n is too small for the game to play!")
   if(n %% 2 < 1) stop("Sorry, n must be a odd number!")
   
-  x11() #open the graphics 
-  
-  
-  install_packages = function(names)
-  {
-    for(name in names)
-    {
-      if (!(name %in% installed.packages()))
-        install.packages(name, repos="http://cran.us.r-project.org")
-      
-      library(name, character.only=TRUE)
-    }
-  }
-  
-  install_packages(c("stringr","ggplot2","Cairo","ggmap","grid","scales","png","jpeg"))
-  
+  result_table = tibble("Date"= as.character(Sys.Date()), "Time" = as.character(format(Sys.time(), "%X")), "Game" = "None", "Result" = "None")
+
   #Choose to play with your friend or computer
   first_choose = function(){
     repeat{
@@ -679,7 +667,12 @@ gomoku = function(n = 19)
   
   
 ###############################Begin functions over#####################################3  
-
+  
+  
+  
+  gomoku_begin = function(n, r_table){
+  x11() #open the graphics  
+  
   click = 0
   result = ""
   
@@ -711,11 +704,29 @@ gomoku = function(n = 19)
     }
   }
   
+
+  if(result == "White Wins!"){
+    img = readPNG(system.file("img","white_wins.png", package="LittleGames"))
+    game = "Battle"
+    }
+  if(result == "Black Wins!"){
+    img = readPNG(system.file("img","black_wins.png",package = "LittleGames"))
+    game = "Battle"
+    }
+  if(result == "You Win!"){
+    img = readPNG(system.file("img","happy_face.png", package = "LittleGames"))
+    game = "Computer"
+    }
+  if(result == "You Lose!"){
+    img = readPNG(system.file("img","sad_face.png",package = "LittleGames"))
+    game = "Computer"
+    }
   
-  if(result == "White Wins!"){img = readPNG(system.file("img","white_wins.png", package="LittleGames"))}
-  if(result == "Black Wins!"){img = readPNG(system.file("img","black_wins.png",package = "LittleGames"))}
-  if(result == "You Win!"){img = readPNG(system.file("img","happy_face.png", package = "LittleGames"))}
-  if(result == "You Lose!"){img = readPNG(system.file("img","sad_face.png",package = "LittleGames"))}
+  
+  result_table <<- result_table%>%
+    rbind(c(as.character(Sys.Date()), as.character(format(Sys.time(), "%X")), game, result))
+  
+  
   
   gameover(result = result, img = img)
   repeat{
@@ -723,12 +734,23 @@ gomoku = function(n = 19)
     l=locator(1)
     x = l$x
     y = l$y
-    if(x>40 & x<60 & y>8 & y<16){
-      return("Game Closed")}
+    if(x>40 & x<60 & y>8 & y<16){return(result_table)}
     if(x>32 & x<69 & y>23 & y<31){
       dev.off()
-      gomoku(n)}
+      return(gomoku_begin(n, result_table))}
   }
+  }
+  #############################gomoku begin#############################  
+  
+  
+  r_table = gomoku_begin(n, result_table)
+  if(nrow(r_table) == 1){return("Game Closed, No Record")}
+  else{
+    r_table = r_table%>%
+      filter(Game != "None")
+    return(r_table)
+  }
+  
 }
 
 
