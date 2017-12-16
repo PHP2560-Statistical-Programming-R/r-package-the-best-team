@@ -26,4 +26,5 @@ little_game = function(name){
   #Snake
   
   #Flags
+  return(filter(t, Name == name))
   }
