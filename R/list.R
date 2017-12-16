@@ -9,8 +9,8 @@
 #'@export
 
 little_game = function(name){
-  t = tibble("Name" = c("","",""), "Rule" = c("","",""), "Additional Notes" = c("","",""))
-  t$Name = list("Mine Sweeper", "Gomoku", "Snake", "Flags")
+  t = tibble("Name" = c("","","",""), "Rule" = c("","","",""), "Additional Notes" = c("","","",""))
+  t$Name = c("Mine Sweeper", "Gomoku", "Snake", "Flags")
   
   #gomoku
   t$Rule[2] = "Each player chooses a color and who gets black goes first; Players place their stones on 
