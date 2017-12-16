@@ -22,9 +22,5 @@ Imports:
   rpart,
   caret,
   e1071,
-  Cairo,
-  ggmap,
-  grid,
-  scales,
 
    
