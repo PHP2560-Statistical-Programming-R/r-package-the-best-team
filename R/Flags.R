@@ -1,7 +1,19 @@
-#' R Flags
+#' @titleR Flags
+#' 
+#' 
+#' @description R flag is a simple drawing game. 
+#' Players can choose the number of points and name of a country to get a country flag.
+#' 
 #' @param Number of points
-#' @return Japanese flag
-#' @export
+#' @return Country flag with a fixed number of points.
+#' 
+#' @note Welcome to add more flags
+#'       
+#' @author Wei Wang
+#' @export   
+#' @example Iceland()
+#' @example Denmark(25000)
+
 Japan <- function(a = 20000){
   install_packages <- function(names)
   {
