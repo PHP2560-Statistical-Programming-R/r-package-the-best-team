@@ -41,5 +41,4 @@ little_game = function(name){
   
   
   return(filter(t, Name == name))
-
-  }
+}
