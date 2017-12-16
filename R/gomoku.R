@@ -1,68 +1,48 @@
 #' @title A classic chessborad game. 
 #' 
 #' @description Play with your friend or play with computer.
-#' Player who has five stones in a row wins.
 #' Players choose a position to locate their stones alternatively, with 
 #' black going first.
-#' Player who first has five continuous stones in a row (horizontally, 
-#' vertically or diagonally).
+#' Player who first has five stones in row (horizontally, 
+#' vertically or diagonally) wins the game.
 #' 
 #' @param n numbers of rows and columns in the chessboard. The default value
 #' is 19, which is the standard size of a gomoku chessboard.
 #' 
-#' @note (1)Please do not roll the mouse scroll after the graphics device pops out.
-#'       (2)Please close the game in a normal way instead of closing the graphics
-#' device directly.
+#' @note (1)Do not roll the mouse scroll after the graphic device pops out, or the
+#' plots will be messed up.
+#'       (2)Better not close the graphic device during the game. Close it only after
+#'       clicking the quit option.
 #'       (3)The value of n should be larger than 5 so the board can accomadate at
 #'       least five stones.
 #'       (4)The value of code{n} should be an odd number.
 #'       
 #' @return If you keep playing the game, nothing will be returned; If you close
 #' the game by clicking "quit", a table containing all the results will be displayed;
+#' if there are no results, a character string "Game Closed, No Record" will return.    
+#' 
 #' @author Yimo Zhang
 #' 
-#' @references /url{https://github.com/yihui/fun/blob/master/R/gomoku.R}, where
+#' @references \url{https://github.com/yihui/fun/blob/master/R/gomoku.R}, where
 #' the basic idea of this function came from.
-#' /url{http://www.sohu.com/a/156507478_466874}, where the idea of ploting taiji.png
+#' \url{http://www.sohu.com/a/156507478_466874}, where the idea of ploting taiji.png
 #' is borrowd.
-#' 
-#' 
-#' @return If you keep playing the game, nothing will be returned; If you close
-#' the game in a normal way (click quit to stop), a character string "Game Closed" will be returned.
+#' @examples  
+#' gomoku(n = 21)
+#'
 #' @export   
-#' @example gomoku(n = 21)
+
 
 
 gomoku = function(n = 19)
 {
-  
   if (!interactive()) return() #check if R is running interactively; if not, quit the game
   if(n < 5) stop("Hmm, n is too small for the game to play!")
   if(n %% 2 < 1) stop("Sorry, n must be a odd number!")
   
-
+  
   result_table = tibble("Date"= as.character(Sys.Date()), "Time" = as.character(format(Sys.time(), "%X")), "Game" = "None", "Result" = "None")
-
   #Choose to play with your friend or computer
-
-  x11()
-  
-  
-  install_packages = function(names)
-  {
-    for(name in names)
-    {
-      if (!(name %in% installed.packages()))
-        install.packages(name, repos="http://cran.us.r-project.org")
-      
-      library(name, character.only=TRUE)
-    }
-  }
-  
-  install_packages(c("stringr","ggplot2","Cairo","ggmap","grid","scales","png","jpeg"))
-  
-  
-
   first_choose = function(){
     repeat{
       options(locatorBell = FALSE)
@@ -74,7 +54,7 @@ gomoku = function(n = 19)
     }
   }
   
-  
+  #Choose the difficulty of the game
   second_choose = function(){
     repeat{
       options(locatorBell = FALSE)
@@ -86,7 +66,7 @@ gomoku = function(n = 19)
     }
   }
   
-  
+  #Choose the color you want to play
   third_choose = function(){
     repeat{
       options(locatorBell = FALSE)
@@ -97,7 +77,8 @@ gomoku = function(n = 19)
       if(x>39 & x<61 & y>8 & y<16){return(6)}
     }
   }
-########################Backstage functions############################### 
+  ########################Backstage functions############################### 
+  #Check if there are five stones of the same color in row
   judge_five = function(x, location){
     #line1 is a y=x kind of line, the point x is the middle of the five points
     x1 = c((x[1]-2):(x[1]+2))
@@ -134,13 +115,13 @@ gomoku = function(n = 19)
     }
   }
   
-  #check if wins
+  #check if somebody wins
   if_win = function(set){
     win = sapply(set, judge_five, set)#check if there are five continuous points in black chessmen set
     return(is.element(1, win))
   }
   
-  #player play
+  #player plays
   player_play = function(playlist, n){
     repeat {
       options(locatorBell = FALSE)
@@ -154,14 +135,19 @@ gomoku = function(n = 19)
     return(l)
   }
   
-  #computer play
+  #computer plays
   computer_play = function(player, computer, playlist, n){
     get_4 = get_function(4, player, computer, n)
+    #If there are available spots to block 4 continuous stones
     if(!is.list(get_4)){get_3 = get_function(3, player, computer, n)} else{return(get_4)}
+    #If there are available spots to block 3 continuous stones
     if(!is.list(get_3)){get_2 = get_function(2, player, computer, n)} else{return(get_3)}
+    #If there are available spots to block 2 continuous stones
     if(!is.list(get_2)){get_1 = get_function(1, player, computer, n)} else{return(get_2)}
+    #If there are available spots to around 1 stone
     if(!is.list(get_1)){
       repeat{
+        #randomly choose an available spot
         new = list(c(sample(1:n,1),sample(1:n,1)))
         xy <- paste(new, collapse = ":") #record the step
         if (!is.element(xy, playlist)) #break when the point had chessman on it
@@ -226,7 +212,7 @@ gomoku = function(n = 19)
   }
   
   
-  ##Generate five points based on their x-value and y-value
+  #Generate five points based on their x-value and y-value
   make_line = function(x,y){
     a = list()
     for(i in 1:length(x)){
@@ -235,7 +221,7 @@ gomoku = function(n = 19)
     return(a)
   }
   
-  #Check if the near points are filled
+  #Check if the neareast points are filled
   check_blank = function(num_point, index, point, location, location2, n){
     i = num_point
     x = point
@@ -278,7 +264,7 @@ gomoku = function(n = 19)
     else{return(1)}
   }
   
-  #check availability
+  #check if a spot is available
   check_blank_hard = function(num_point, index, point, player, computer, n){
     i = num_point
     x = point
@@ -315,7 +301,7 @@ gomoku = function(n = 19)
   }
   
   
-  #Get the avalible spot; if not available , return 0
+  #Get the avalible spot; if not available , return 0 (hard version)
   get_function_hard = function(num, player, computer, n = NULL){
     get_num = lapply(player, judge_hard, num, player, computer, n)
     temp = sapply(get_num, length)
@@ -337,25 +323,7 @@ gomoku = function(n = 19)
     else {return (0)}
   }   
   
-  #Check if the point is located inside the chessboard
-  within_boundary = function(x, n){
-    x = unlist(x)
-    judge_l = x<1
-    judge_r = x>n
-    if(sum(judge_l)>0 || sum(judge_r)>0){return(0)}
-    else{return(1)}
-  }
-  
-  ##Generate five points based on their x-value and y-value
-  make_line = function(x,y){
-    a = list()
-    for(i in 1:length(x)){
-      a[[i]] = c(x[i],y[i])
-    }
-    return(a)
-  }
-  
-  #computer play
+  #computer play (hard version)
   computer_play_hard = function(player, computer, playlist, n){
     m = n+1
     i = 0
@@ -364,6 +332,7 @@ gomoku = function(n = 19)
     if(!is.list(get_3)){get_2 = get_function_hard(2, player, computer, n)} else{return(get_3)}
     if(!is.list(get_2)){
       repeat{
+        #From center to margin, choose an available spot
         spot = vector()
         left = m/2 - i
         right = m/2 +i
@@ -384,7 +353,7 @@ gomoku = function(n = 19)
   
   
   
-  #Check if there are num continuous points
+  #Check if there are num continuous points (hard version)
   judge_hard = function(x, num, player, computer, n = NULL){
     #line1 is a y=x kind of line, the point x is the middle of the five points
     x1 = c(x[1]:(x[1]+num-1))
@@ -440,6 +409,7 @@ gomoku = function(n = 19)
   #######################Backstage function end###########################
   
   #######################plot function####################################
+  #plot the start menu (choose opponent)
   stage0 = function(){
     
     n = 100
@@ -460,7 +430,7 @@ gomoku = function(n = 19)
     rasterImage(taiji,30, 35, 70, 75)
   }
   
-  
+  #Plot the level choose menu
   stage1 = function(){
     taiji = readPNG(system.file("img","taiji.png",package = "LittleGames"))
     windowsFonts(JP1 = windowsFont("Pristina"))
@@ -481,6 +451,7 @@ gomoku = function(n = 19)
     rasterImage(taiji,30, 35, 70, 75)
   }
   
+  #Plot the color choose menu
   stage2 = function(){
     taiji = readPNG(system.file("img","taiji.png",package = "LittleGames"))
     windowsFonts(JP1 = windowsFont("Pristina"))
@@ -502,6 +473,7 @@ gomoku = function(n = 19)
     
   }
   
+  #Plot the game over menu (to play again or to quit)
   gameover = function(result, img){
     colfunc <- colorRampPalette(c("white","goldenrod3", "white","goldenrod3","white"))
     colfunc1 = colorRampPalette(c("black","gray90"))
@@ -532,13 +504,10 @@ gomoku = function(n = 19)
       len = str_count(result)
       text(x = seq(25,75, length.out = len), y = rep(8*n/9,len), label = unlist(strsplit(result, NULL)), cex = 3.5, col = colfunc1(len), family = "JP1", lwd = 2.5)
     }
-  }  
-#############################Plot functions over########################################
+  }
   
-  
-############################Begin functions###########################################
-  gomoku_self <- function(n = 19) {
-    
+  #Plot chessboard
+  chess_board = function(n){
     #Setting of the game
     img = readJPEG(system.file("img","wood.jpg",package = "LittleGames"))
     par(mar = rep(0, 4)) #No blank space for the main plot and the margin of plot
@@ -551,7 +520,16 @@ gomoku = function(n = 19)
     points(rep(temp, 3), rep(temp, each = 3),
            pch = 19, cex = 6/sqrt(n))#draw the black point with the shape of solid circle
     box() #draw the outline of the plot
+  }
+  #############################Plot functions over########################################
+  
+  
+  ############################Begin functions###########################################
+  #Play with your friend
+  gomoku_self <- function(n = 19) {
     
+    #draw chessboard
+    chess_board(n)
     
     #Playing the game
     playedlist <- NULL #record the points have been stepped on
@@ -595,27 +573,11 @@ gomoku = function(n = 19)
     }
   }
   
-  
-  gomoku_easy <- function(n = 19, choose = 1) {
+  #Play with computer (easy version)
+  gomoku_computer <- function(n = 19, choose = 1, level) {
     
-    
-    if (!interactive()) return() #check if R is running interactively; if not, quit the game
-    if(n < 5) stop("Hmm, n is too small for the game to play!")
-    if(n %% 2 < 1) stop("Sorry, n must be a odd number!")
-    #Setting of the game
-    img = readJPEG(system.file("img","wood.jpg",package = "LittleGames"))
-    par(mar = rep(0, 4)) #No blank space for the main plot and the margin of plot
-    plot(1:n, type = "n", xlim = c(1, n), axes = FALSE, xlab = "",
-         ylab = "", bty = "o", lab = c(n, n, 1))#add points to the plot where the lines should be located
-    rasterImage(img,0,0,1+n,1+n)
-    segments(1, 1:n, n, 1:n)#draw horizontal lines
-    segments(1:n, 1, 1:n, n)#draw vertical lines
-    temp = c(round((n+1)/5),(n+1)/2, round(4*(n+1)/5),round(4*(n+1)/5))
-    points(rep(temp, 3), rep(temp, each = 3),
-           pch = 19, cex = 6/sqrt(n))#draw the black point with the shape of solid circle
-    box() #draw the outline of the plot
-    
-    
+    #Draw chessboard
+    chess_board(n)
     
     #Playing the game
     l = list()
@@ -644,7 +606,9 @@ gomoku = function(n = 19)
           
           
           #computer play
-          new = computer_play(player, computer, playedlist, n)
+          if(level == "easy"){new = computer_play(player, computer, playedlist, n)}
+          if(level == "hard"){new = computer_play_hard(player, computer, playedlist, n)}
+          
           new = unlist(new)
           l$x = new[1]
           l$y = new[2]
@@ -662,7 +626,8 @@ gomoku = function(n = 19)
         }
         if(choose == 2){
           #computer play
-          new = computer_play(player, computer, playedlist, n)
+          if(level == "easy"){new = computer_play(player, computer, playedlist, n)}
+          if(level == "hard"){new = computer_play_hard(player, computer, playedlist, n)}
           new = unlist(new)
           l$x = new[1]
           l$y = new[2]
@@ -700,184 +665,79 @@ gomoku = function(n = 19)
   }
   
   
-  gomoku_hard <- function(n = 19, choose = 1) {
-    
-    
-    if (!interactive()) return() #check if R is running interactively; if not, quit the game
-    if(n < 5) stop("Hmm, n is too small for the game to play!")
-    if(n %% 2 < 1) stop("Sorry, n must be a odd number!")
-    #Setting of the game
-    img = readJPEG(system.file("img","wood.jpg",package = "LittleGames"))
-    par(mar = rep(0, 4)) #No blank space for the main plot and the margin of plot
-    plot(1:n, type = "n", xlim = c(1, n), axes = FALSE, xlab = "",
-         ylab = "", bty = "o", lab = c(n, n, 1))#add points to the plot where the lines should be located
-    rasterImage(img,0,0,1+n,1+n)
-    segments(1, 1:n, n, 1:n)#draw horizontal lines
-    segments(1:n, 1, 1:n, n)#draw vertical lines
-    temp = c(round((n+1)/5),(n+1)/2, round(4*(n+1)/5),round(4*(n+1)/5))
-    points(rep(temp, 3), rep(temp, each = 3),
-           pch = 19, cex = 6/sqrt(n))#draw the black point with the shape of solid circle
-    box() #draw the outline of the plot
-    
-    
-    
-    #Playing the game
-    l = list()
-    playedlist <- c("0:0") #record the points have been stepped on
-    i <- 1 #rounds that will have be played
-    black = list() #record the black chessman
-    white = list() #record the while chessman
-    chess_color = c("black", "white")
-    player = get(chess_color[choose])
-    computer = get(chess_color[3-choose])
-    repeat {
-      for (j in 1:2) {
-        if(choose == 1){
-          #player play
-          l = player_play(playedlist, n)
-          xy <- paste(l, collapse = ":")
-          playedlist <- c(playedlist, xy) #add the step to the playlist if it is successfully played
-          points(l, cex = 3*19/n, pch = c(19, 21)[choose], bg = c("black", "white")[choose]) #draw the step (black first)
-          #black as solid circle, while as filled circle
-          
-          #check if player wins
-          player[[i]] = c(l$x, l$y)
-          if(if_win(player)){
-            return("You Win!")
-          }
-          
-          
-          #computer play
-          new = computer_play_hard(player, computer, playedlist, n)
-          new = unlist(new)
-          l$x = new[1]
-          l$y = new[2]
-          xy <- paste(l, collapse = ":")
-          playedlist <- c(playedlist, xy)
-          points(l, cex = 3*19/n, pch = c(19, 21)[3-choose], bg = c("black", "white")[3-choose]) #draw the step (black first)
-          #black as solid circle, while as filled circle
-          
-          #check if computer wins
-          computer[[i]] = c(l$x, l$y)#update the black chessmen set
-          
-          if(if_win(computer)){
-            return("You Lose!")
-          }
-          j = j+2
-        }
-        if(choose == 2){
-          #computer play
-          new = computer_play_hard(player, computer, playedlist, n)
-          new = unlist(new)
-          l$x = new[1]
-          l$y = new[2]
-          xy <- paste(l, collapse = ":")
-          playedlist <- c(playedlist, xy)
-          points(l, cex = 3*19/n, pch = c(19, 21)[3-choose], bg = c("black", "white")[3-choose]) #draw the step (black first)
-          #black as solid circle, while as filled circle
-          
-          #check if computer wins
-          computer[[i]] = c(l$x, l$y)#update the black chessmen set
-          
-          if(if_win(computer)){
-            return("You Lose!")
-          }
-          #player play
-          l = player_play(playedlist, n)
-          xy <- paste(l, collapse = ":")
-          playedlist <- c(playedlist, xy) #add the step to the playlist if it is successfully played
-          points(l, cex = 3*19/n, pch = c(19, 21)[choose], bg = c("black", "white")[choose]) #draw the step (black first)
-          #black as solid circle, while as filled circle
-          
-          #check if player wins
-          player[[i]] = c(l$x, l$y)
-          if(if_win(player)){
-            return("You Win!")
-          }
-          j = j+2
-        }
-        if (2*(i) >= n^2) break #break when the chessboard has been filled
-        
-        i = i+1 #enter the next round
-        if (2*(i-1) >= n^2) break #bread when the chessboard has been filled
-      }
-    }
-  }
-###############################Begin functions over#####################################3  
-  
-  
+  ###############################Begin functions over#####################################3  
   
   gomoku_begin = function(n, r_table){
-  x11() #open the graphics  
-  
-  click = 0
-  result = ""
-  
-  #Choose whom to play wit
-  stage0()
-  
-  click = first_choose()
-  
-  if(click == 1){result = gomoku_self(n)}
-  
-  
-  if(click == 2){
-    #Choose color
-    stage1()
-    click = second_choose()
+    x11() #open the graphics  
     
-    if(click == 3){
-      stage2()
-      click = third_choose()
-      if(click == 5){result = gomoku_easy(choose = 1)}
-      if(click == 6){result = gomoku_easy(choose = 2)}
+    click = 0
+    result = ""
+    
+    #Choose whom to play wit
+    stage0()
+    
+    click = first_choose()
+    
+    if(click == 1){result = gomoku_self(n)}
+    
+    
+    if(click == 2){
+      #Choose color
+      stage1()
+      click = second_choose()
+      
+      if(click == 3){
+        stage2()
+        click = third_choose()
+        if(click == 5){result = gomoku_computer(n, choose = 1, level = "easy")}
+        if(click == 6){result = gomoku_computer(n, choose = 2, level = "easy")}
+      }
+      
+      if(click == 4){
+        stage2()
+        click = third_choose()
+        if(click == 5){result = gomoku_computer(n, choose = 1, level = "hard")}
+        if(click == 6){result = gomoku_computer(n, choose = 2, level = "hard")}
+      }
     }
     
-    if(click == 4){
-      stage2()
-      click = third_choose()
-      if(click == 5){result = gomoku_hard(choose = 1)}
-      if(click == 6){result = gomoku_hard(choose = 2)}
+    
+    if(result == "White Wins!"){
+      img = readPNG(system.file("img","white_wins.png", package="LittleGames"))
+      game = "Battle"
     }
-  }
-  
-
-  if(result == "White Wins!"){
-    img = readPNG(system.file("img","white_wins.png", package="LittleGames"))
-    game = "Battle"
+    if(result == "Black Wins!"){
+      img = readPNG(system.file("img","black_wins.png",package = "LittleGames"))
+      game = "Battle"
     }
-  if(result == "Black Wins!"){
-    img = readPNG(system.file("img","black_wins.png",package = "LittleGames"))
-    game = "Battle"
+    if(result == "You Win!"){
+      img = readPNG(system.file("img","happy_face.png", package = "LittleGames"))
+      game = "Computer"
     }
-  if(result == "You Win!"){
-    img = readPNG(system.file("img","happy_face.png", package = "LittleGames"))
-    game = "Computer"
+    if(result == "You Lose!"){
+      img = readPNG(system.file("img","sad_face.png",package = "LittleGames"))
+      game = "Computer"
     }
-  if(result == "You Lose!"){
-    img = readPNG(system.file("img","sad_face.png",package = "LittleGames"))
-    game = "Computer"
+    
+    
+    result_table <<- result_table%>%
+      rbind(c(as.character(Sys.Date()), as.character(format(Sys.time(), "%X")), game, result))
+    
+    
+    
+    gameover(result = result, img = img)
+    repeat{
+      options(locatorBell = FALSE)
+      l=locator(1)
+      x = l$x
+      y = l$y
+      
+      if(x>40 & x<60 & y>8 & y<16){return(result_table)}
+      
+      if(x>32 & x<69 & y>23 & y<31){
+        dev.off()
+        return(gomoku_begin(n, result_table))}
     }
-  
-  
-  result_table <<- result_table%>%
-    rbind(c(as.character(Sys.Date()), as.character(format(Sys.time(), "%X")), game, result))
-  
-  
-  
-  gameover(result = result, img = img)
-  repeat{
-    options(locatorBell = FALSE)
-    l=locator(1)
-    x = l$x
-    y = l$y
-
-    if(x>40 & x<60 & y>8 & y<16){return(result_table)}
-
-    if(x>32 & x<69 & y>23 & y<31){
-      dev.off()
-      return(gomoku_begin(n, result_table))}
-  }
   }
   #############################gomoku begin#############################  
   
@@ -891,12 +751,4 @@ gomoku = function(n = 19)
   }
   
 }
-
-
-
-
-
-
-
-
 

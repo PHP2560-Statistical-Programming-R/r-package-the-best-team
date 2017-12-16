@@ -7,11 +7,18 @@
 Sweden(a = 20000)
 }
 \arguments{
-\item{Number}{of points}
+\item{n}{Number of points}
 }
 \value{
-Sweden flag
+Country flag with a fixed number of points.
 }
 \description{
-R Flags
+R flag is a simple drawing game. 
+Players can choose the number of points and name of a country to get a country flag.
+}
+\note{
+Welcome to add more flags
+}
+\author{
+Wei Wang
 }

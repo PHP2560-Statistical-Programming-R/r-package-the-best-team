@@ -1,4 +1,4 @@
-#' @titleR Flags
+#' @title R Flags
 #' @description R flag is a simple drawing game. 
 #' Players can choose the number of points and name of a country to get a country flag.
 #' 
@@ -10,6 +10,7 @@
 #' @author Wei Wang
 #' @export   
 #' @example Japan()
+#' 
 Japan <- function(a = 20000){
   install_packages <- function(names)
   {
@@ -43,7 +44,7 @@ Japan <- function(a = 20000){
     scale_colour_manual(values = japanPalette)
 }
 
-#' @titleR Flags
+#' @title R Flags
 #' @description R flag is a simple drawing game. 
 #' Players can choose the number of points and name of a country to get a country flag.
 #' 
@@ -88,7 +89,7 @@ Sweden <- function(a = 20000){
     scale_colour_manual(values = SwedenPalette)
 }
 
-#' @titleR Flags
+#' @title R Flags
 #' @description R flag is a simple drawing game. 
 #' Players can choose the number of points and name of a country to get a country flag.
 #' 
@@ -134,7 +135,7 @@ Denmark <- function(a = 20000){
 }
 
 
-#' @titleR Flags
+#' @title R Flags
 #' @description R flag is a simple drawing game. 
 #' Players can choose the number of points and name of a country to get a country flag.
 #' 
@@ -182,7 +183,7 @@ Finland <- function(a = 20000){
 
 
 
-#' @titleR Flags
+#' @title R Flags
 #' @description R flag is a simple drawing game. 
 #' Players can choose the number of points and name of a country to get a country flag.
 #' 
@@ -229,7 +230,7 @@ Norway <- function(a = 20000){
 }
 
 
-#' @titleR Flags
+#' @title R Flags
 #' @description R flag is a simple drawing game. 
 #' Players can choose the number of points and name of a country to get a country flag.
 #' 

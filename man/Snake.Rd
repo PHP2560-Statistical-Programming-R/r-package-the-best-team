@@ -10,8 +10,21 @@ Snake()
 \item{Keyboards}{events}
 }
 \value{
-Snake moving
+Fruits a snake got
 }
 \description{
-R Snake
+R snake is a classic game. 
+Players use Up, Down, Left, Right to move and change directions.
+The head of the snake should not touch its tail or the ledge. 
+The more fruits a snake eats, the higher a player will rank.
+}
+\note{
+Do not press Q if you do not want to quit R.
+}
+\references{
+/url{http://blog.fens.me/r-game-snake/}, where
+the basic idea of this function came from.
+}
+\author{
+Wei Wang
 }

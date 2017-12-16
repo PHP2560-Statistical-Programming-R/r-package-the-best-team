@@ -10,7 +10,7 @@
 
 little_game = function(name){
   t = tibble("Name" = c("","","",""), "Rule" = c("","","",""), "Additional Notes" = c("","","",""))
-  t$Name = c("Mine Sweeper", "Gomoku", "Snake", "Flags")
+  t$Name = c("Mine Sweeper", "Gomoku", "R Snake", "R Flags")
   
   #gomoku
   t$Rule[2] = "Each player chooses a color and who gets black goes first; Players place their stones on 
@@ -21,13 +21,18 @@ little_game = function(name){
   please see website {http://gomokuworld.com/articles/16_useful_tips_to_become_a_better_gomoku_player}."
   
   #mine sweeper
+  t$Rule[1] = "Play the Mine Sweeper game in R Just type in minesweeper() and the game will start The 
+  controls should be familiar to you: Click the left mouse button to dig in an area, and right button 
+  to mark or unmark the area with flags."
   
+  t$`Additional Notes`[1] = "Thanks for the original coder Yihui Xie, for more info: 
+  {https://yihui.name/en/2011/08/the-fun-package-use-r-for-fun/}"
   
   #Snake
-  t$Rule[4] = "R snake is a classic game. Players use Up, Down, Left, Right to move and change directions. 
+  t$Rule[3] = "R snake is a classic game. Players use Up, Down, Left, Right to move and change directions. 
   The head of the snake should not touch its tail or the ledge. The more fruits a snake eats, the higher a player will rank."
   
-  t$`Additional Notes`[4] = "The code here has a lot to be improved, for more info: 
+  t$`Additional Notes`[3] = "The code here has a lot to be improved, for more info: 
   {http://blog.fens.me/r-game-snake/}"
   
   
@@ -35,9 +40,9 @@ little_game = function(name){
 
   return(filter(t, tolower(Name) == name))
 
-  t$Rule[5] = "R flag is a simple drawing game. Players can choose the number of points and name of a country to get a country flag."
+  t$Rule[4] = "R flag is a simple drawing game. Players can choose the number of points and name of a country to get a country flag."
   
-  t$`Additional Notes`[5] = "The flags here are so limited, welcome to add more flags."
+  t$`Additional Notes`[4] = "The flags here are so limited, welcome to add more flags."
   
   
   return(filter(t, Name == name))

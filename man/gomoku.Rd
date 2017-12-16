@@ -13,30 +13,33 @@ is 19, which is the standard size of a gomoku chessboard.}
 \value{
 If you keep playing the game, nothing will be returned; If you close
 the game by clicking "quit", a table containing all the results will be displayed;
-
-If you keep playing the game, nothing will be returned; If you close
-the game in a normal way (click quit to stop), a character string "Game Closed" will be returned.
+if there are no results, a character string "Game Closed, No Record" will return.
 }
 \description{
 Play with your friend or play with computer.
-Player who has five stones in a row wins.
 Players choose a position to locate their stones alternatively, with 
 black going first.
-Player who first has five continuous stones in a row (horizontally, 
-vertically or diagonally).
+Player who first has five stones in row (horizontally, 
+vertically or diagonally) wins the game.
 }
 \note{
-(1)Please do not roll the mouse scroll after the graphics device pops out.
-      (2)Please close the game in a normal way instead of closing the graphics
-device directly.
+(1)Do not roll the mouse scroll after the graphic device pops out, or the
+plots will be messed up.
+      (2)Better not close the graphic device during the game. Close it only after
+      clicking the quit option.
       (3)The value of n should be larger than 5 so the board can accomadate at
       least five stones.
       (4)The value of code{n} should be an odd number.
 }
+\examples{
+ 
+gomoku(n = 21)
+
+}
 \references{
-/url{https://github.com/yihui/fun/blob/master/R/gomoku.R}, where
+\url{https://github.com/yihui/fun/blob/master/R/gomoku.R}, where
 the basic idea of this function came from.
-/url{http://www.sohu.com/a/156507478_466874}, where the idea of ploting taiji.png
+\url{http://www.sohu.com/a/156507478_466874}, where the idea of ploting taiji.png
 is borrowd.
 }
 \author{

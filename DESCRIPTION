@@ -9,7 +9,8 @@ License: MIT
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
-Imports: 
+Imports:
+Depends:
   ggplot2 (>= 2.2.1),
   dplyr (>= 0.7.4),
   stringr,
@@ -21,6 +22,7 @@ Imports:
   jpeg,
   rpart,
   caret,
-  e1071,
+  e1071
+  
 
    
