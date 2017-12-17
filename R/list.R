@@ -1,7 +1,7 @@
 #'@title The profile of this package
 #'@description This function contains some information regarding the four games in this 
 #'            package. If you have doubt about these games, this function will probably help you.
-#'@param name The name of a function.
+#'@param name The name of a game.("mine_sweeper", "gomoku", "r_snake", "r_flags")
 #'@return A list of information about the game.
 #'@Author Wei Wang, Yimo Zhang, Bowei Wei
 #'@examples 
@@ -10,7 +10,7 @@
 
 little_game = function(name){
   t = tibble("Name" = c("","","",""), "Rule" = c("","","",""), "Additional Notes" = c("","","",""))
-  t$Name = c("Mine Sweeper", "Gomoku", "R Snake", "R Flags")
+  t$Name = c("Mine_Sweeper", "Gomoku", "Snake", "Flags")
   
   #gomoku
   t$Rule[2] = "Each player chooses a color and who gets black goes first; Players place their stones on 
@@ -36,14 +36,13 @@ little_game = function(name){
   {http://blog.fens.me/r-game-snake/}"
   
   
-  #Flags
-
-  return(filter(t, tolower(Name) == name))
+  #Flag
 
   t$Rule[4] = "R flag is a simple drawing game. Players can choose the number of points and name of a country to get a country flag."
   
   t$`Additional Notes`[4] = "The flags here are so limited, welcome to add more flags."
   
-  
-  return(filter(t, Name == name))
+  #return
+  return(filter(t, tolower(Name) == name))
+
 }

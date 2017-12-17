@@ -12,19 +12,7 @@
 #' @example Japan()
 #' 
 Japan <- function(a = 20000){
-  install_packages <- function(names)
-  {
-    for(name in names)
-    {
-      if (!(name %in% installed.packages()))
-        install.packages(name, repos="http://cran.us.r-project.org")
-
-      library(name, character.only=TRUE)
-    }
-  }
-
-  install_packages(c("ggplot2","dplyr","rpart","caret","e1071"))
-
+  
   # Let's create 50k points on a 3x2 grid
   x <- runif(a, min = 0, max = 3)
   y <- runif(a, min = 0, max = 2)
@@ -57,18 +45,6 @@ Japan <- function(a = 20000){
 #' @export   
 #' @example Sweden()
 Sweden <- function(a = 20000){
-  install_packages <- function(names)
-  {
-    for(name in names)
-    {
-      if (!(name %in% installed.packages()))
-        install.packages(name, repos="http://cran.us.r-project.org")
-
-      library(name, character.only=TRUE)
-    }
-  }
-
-  install_packages(c("ggplot2","dplyr","rpart","caret","e1071"))
 
   # Let's create 200k points on a 16x10 grid
   x <- runif(a, min = 0, max = 16)
@@ -102,18 +78,7 @@ Sweden <- function(a = 20000){
 #' @export   
 #' @example Denmark()
 Denmark <- function(a = 20000){
-  install_packages <- function(names)
-  {
-    for(name in names)
-    {
-      if (!(name %in% installed.packages()))
-        install.packages(name, repos="http://cran.us.r-project.org")
 
-      library(name, character.only=TRUE)
-    }
-  }
-
-  install_packages(c("ggplot2","dplyr","rpart","caret","e1071"))
 
   # Let's create 200k points on a 16x10 grid
   x <- runif(a, min = 0, max = 16)
@@ -148,18 +113,7 @@ Denmark <- function(a = 20000){
 #' @export   
 #' @example Finland()
 Finland <- function(a = 20000){
-  install_packages <- function(names)
-  {
-    for(name in names)
-    {
-      if (!(name %in% installed.packages()))
-        install.packages(name, repos="http://cran.us.r-project.org")
-
-      library(name, character.only=TRUE)
-    }
-  }
-
-  install_packages(c("ggplot2","dplyr","rpart","caret","e1071"))
+  
 
   # Let's create 200k points on a 16x10 grid
   x <- runif(a, min = 0, max = 16)
@@ -196,19 +150,7 @@ Finland <- function(a = 20000){
 #' @export   
 #' @example Norway()
 Norway <- function(a = 20000){
-  install_packages <- function(names)
-  {
-    for(name in names)
-    {
-      if (!(name %in% installed.packages()))
-        install.packages(name, repos="http://cran.us.r-project.org")
-
-      library(name, character.only=TRUE)
-    }
-  }
-
-  install_packages(c("ggplot2","dplyr","rpart","caret","e1071"))
-
+ 
   # Let's create 200k points on a 21x16 grid
   x <- runif(a, min = 0, max = 21)
   y <- runif(a, min = 0, max = 16)
@@ -243,18 +185,7 @@ Norway <- function(a = 20000){
 #' @export   
 #' @example Iceland()
 Iceland <- function(a = 20000){
-  install_packages <- function(names)
-  {
-    for(name in names)
-    {
-      if (!(name %in% installed.packages()))
-        install.packages(name, repos="http://cran.us.r-project.org")
 
-      library(name, character.only=TRUE)
-    }
-  }
-
-  install_packages(c("ggplot2","dplyr","rpart","caret","e1071"))
 
   # Let's create 200k points on a 21x16 grid
   x <- runif(a, min = 0, max = 21)

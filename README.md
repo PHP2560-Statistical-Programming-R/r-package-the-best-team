@@ -1,43 +1,81 @@
 
-# Games Collection Package
+#LittleGames Package
 
-## Sources
+Authors: Wei Wang, Yimo Zhang, Bowei Wei
 
-In this package, we will select some popular games from other packages,
+##Idea of the Package
 
-[fun package](https://github.com/yihui/fun)...
+Now, many games are made in the plotform of C++, javascipt and so on. Few games are driven by R programming, probably because people always see R as a tool to do statistical analysis. We want to show that games can also be made through R program.
 
-in which the codes are poorly commented and contain some bugs. Moreover, the coding style and coding
+Note that we also refer to other people's work when we are making these games, [fun package](https://github.com/yihui/fun). Most of our functions are modified based on the original code.
 
-strategy are somehow "out-of-fashion" because they were created a couple of years ago.
 
-## Purpose
-
-We aim to renew some of the games by:
+## What We Do
 
 (1)Adding comments to the codes so that they are easy to understand;
 
 (2)Fixing the bugs and make some modifications to the codes;
 
-(3)Adding some factors to the games so that they are more "playable". For example, add a restart 
-
-button so that we don't have to call the function over and over again.
+(3)Adding some factors to the games so that they are more "playable". For example, add a restart button so that we don't have to call the function over and over again.
 
 ## Functions
 
-(1)A function that returns a table that contains the names of the games and their following profile;
+### 1. Profile of Games In This Package
 
-(2)Mine sweeper function (modified); You can just type in minesweeper() to start the game. left click is to identify the mines. Right click is for the flags. You will have the options for restart if the game ends. I won't tell you there's bonus scene that you can cheat in the program! hahaha glhf!
+Function Name: little_game()
 
-(3)Snake function (modified);
+This function returns a table that contains the names of the games and their following profile; you can call little_game("game name") to find relevant information 
+of the game.
 
-(4)Gomoku function (modified);
+### 2. Mine Sweeper Game
 
-(5)(Possible)Tag cloud function (modified);
+Function Name: minesweeper
 
-## More
+You can just type in minesweeper() to start the game. left click is to identify the mines. Right click is for the flags. You will have the options for restart if the game ends. I won't tell you there's bonus scene that you can cheat in the program! Hahaha glhf!
 
-The modified games will be included in the Shiny App project.
+### 3. R Snake Game
+
+Function Name: Snake
+
+Call Snake() to play the r_snake game; move the snake by using keyboard.
+
+### 4. Gomoku Game
+
+Functon Name: gomoku
+
+Call gomoku(n) to play the gomoku game. You can decide the size of the chessboard by intering different values of n. You can also call gomoku() to play the standard gomoku game.
+
+### 5. R Flag Games
+
+Function Name: Denmark, Finland, Japan, Iceland, Norway, Sweden
+
+Call the country name to return a corresponding flag. Note that the flag functions are limited, so you may want to check the package to see what country flags are included in this package.
+
+## Contributions of Group Members
+
+Wei Wang: R file
+   
+          Flags.R (R Flag Games)
+          
+          Snake.R (R Snake Game)
+          
+          list.R (Game Profile)
+          
+Yimo Zhang: R file
+
+            gomoku.R (Gomoku Game)
+            
+            list.R (Game Profile)
+            
+Bowei Wei: R file
+
+            mine_sweeper_pkg.R
+            
+            list.R (Game Profile)
+            
+
+      
+          
 
 
 

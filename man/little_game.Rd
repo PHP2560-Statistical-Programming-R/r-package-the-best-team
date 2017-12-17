@@ -7,7 +7,7 @@
 little_game(name)
 }
 \arguments{
-\item{name}{The name of a function.}
+\item{name}{The name of a game.("mine_sweeper", "gomoku", "r_snake", "r_flags")}
 }
 \value{
 A list of information about the game.

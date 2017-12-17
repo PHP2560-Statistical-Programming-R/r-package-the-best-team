@@ -7,5 +7,8 @@
 minesweeper.cheat()
 }
 \description{
-For Idiot player, you can cheat!
+Cheat on mine sweeper game
+}
+\seealso{
+See \code{\link{minesweeper}} to get familiar with the arguments.
 }

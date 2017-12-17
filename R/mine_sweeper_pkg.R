@@ -1,5 +1,5 @@
-#' Play the Mine Sweeper game in R
-#' Just type in minesweeper() and the game will start
+#' @title Play the Mine Sweeper game in R
+#' @description Just type in minesweeper() and the game will start
 #' The controls should be familiar to you: Click the left mouse button to dig in
 #' an area, and right button to mark or unmark the area with flags.
 #' @param width number of grids in horizontal axis
@@ -18,19 +18,23 @@
 
 #`Function starts now
 minesweeper <- function ()  {
-  w <- (readline("Please enter number of width: ")) #' should use input to set the size of the map in mine_sweeper
+  w <- (readline("Please enter number of width: ")) # should use input to set the size of the map in mine_sweeper
   w <- as.numeric(w)
   h <- (readline("Please enter number of height: "))
   h <- as.numeric(h)
   m <- (readline("Please confirm your mines: "))
   m <- as.numeric(m)
   inputs <- list(w=w, h=h, m=m) #save input
+  
+ 
   mine_start(inputs$w, inputs$h, inputs$m, cheat = FALSE)
 }
 
 
 
-#' For Idiot player, you can cheat!
+#' @title For Idiot player, you can cheat!
+#' @description  Cheat on mine sweeper game
+#' @seealso See \code{\link{minesweeper}} to get familiar with the arguments.
 minesweeper.cheat <- function() {
   w <- (readline("Please enter number of width: "))
   w <- as.numeric(w)
@@ -40,15 +44,11 @@ minesweeper.cheat <- function() {
   m <- as.numeric(m)
   inputs <- list(w=w, h=h, m=m)
   #inputs <- input.data()
-  mine_sweeper.cheat(inputs$w, inputs$h, inputs$m, cheat = TRUE)
-}
-
-#Execute funtion for cheating
-mine_sweeper.cheat <- function(width_in, height_in, mines_in, cheat) {
-  mine_start(width = width_in, height = height_in, mines = mines_in, cheat = TRUE)
+  mine_start(inputs$w, inputs$h, inputs$m, cheat = TRUE)
 }
 
 
+#####################mine start##########################
 mine_start <- function(width, height, mines, cheat) {
   if (.Platform$OS.type == "windows") x11() else x11(type = "Xlib")
   # Deal with some exceptions
@@ -340,15 +340,6 @@ answer <- function ()  {
   )
   return()
 }
+#############################mine start over###############################
 
-#`End slide for game over
-#gameover = function(reslt){
-#  n = 100
-#  plot(1:n, type = "n", xlim = c(1, n), axes = FALSE, xlab = "",
-#       ylab = "", bty = "o", lab = c(n, n, 1))
-#  text(50,80,label=reslt,cex=3)
-#  #text(50,40,label="Play Again",cex=2,col=4)
-#  text(50,20,label="Quit",cex=2,col=2)
-#  #rect(33.7, 32, 65.5, 48)
-#  rect(42.3,12,58,27)
-#}
+

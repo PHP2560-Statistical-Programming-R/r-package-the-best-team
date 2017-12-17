@@ -1,7 +1,8 @@
 #' @title A classic chessborad game. 
 #' 
 #' @description Play with your friend or play with computer.
-#' Players choose a position to locate their stones alternatively, with 
+#' Players first choose their color (black or white),
+#' then choose a position to locate their stones alternatively, with 
 #' black going first.
 #' Player who first has five stones in row (horizontally, 
 #' vertically or diagonally) wins the game.
